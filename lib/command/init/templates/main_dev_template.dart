@@ -1,10 +1,17 @@
-class MainDevTemplate {
-  static const String file = '''
+import 'package:flair/command/simple_file_template.dart';
+
+class MainDevTemplate extends SimpleFileTemplate {
+  @override
+  String get template => '''
 import 'package:%%APPNAME%%/core/app_config.dart';
 import 'package:%%APPNAME%%/main_common.dart';
 
 void main() => bootApp(AppFlavor.dev);
 ''';
 
-  static String fileName = 'main_dev.dart';
+  @override
+  String get fileName => 'main_dev.dart';
+
+  @override
+  String get filePath => './';
 }

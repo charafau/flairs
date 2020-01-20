@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="61558617-e237-4ad2-860d-6f05f48e43bb" name="Default Changelist" comment="" />
+    <list default="true" id="61558617-e237-4ad2-860d-6f05f48e43bb" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/lib/command/init/templates/app_config_template.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/command/init/templates/app_notifier_template.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/command/init/templates/app_theme_template.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/command/init/templates/exception_template.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/command/init/templates/failure_template.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/command/init/templates/helpers_template.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/command/init/templates/main_prod_template.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/command/init/templates/network_info_template.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/command/init/templates/result_template.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/command/init/templates/status_template.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/command/simple_file_template.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/command/init/init_command.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/command/init/init_command.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/command/init/templates/main_dev_template.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/command/init/templates/main_dev_template.dart" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,6 +28,9 @@
         <option value="Dart File" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1WLhk48FMupn8ZbgJzpWkP65pAi" />
   <component name="ProjectViewState">
