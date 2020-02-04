@@ -6,3 +6,10 @@ Created from templates made available by Stagehand under a BSD-style
 # Commands
 
 `flair init` - creates basic projects structure + `flair.properties`
+
+generator options:
+
+generate model class for person
+`flairs generate model Person name:string age:int money:double`
+
+`flairs scaffold Person name:string age:int`

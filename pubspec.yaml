@@ -1,4 +1,4 @@
-name: flair
+name: flairs
 description: A sample command-line application.
 # version: 1.0.0
 # homepage: https://www.example.com
@@ -9,6 +9,7 @@ environment:
 dependencies:
   args: ^1.5.2
   yaml: ^2.2.0
+  recase: ^3.0.0
 #  path: ^1.6.0
 
 dev_dependencies:

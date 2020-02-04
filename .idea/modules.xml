@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/flair.iml" filepath="$PROJECT_DIR$/flair.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flairs.iml" filepath="$PROJECT_DIR$/flairs.iml" />
     </modules>
   </component>
 </project>

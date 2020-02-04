@@ -1,4 +1,4 @@
-import 'package:flair/command/simple_file_template.dart';
+import 'package:flairs/command/simple_file_template.dart';
 
 class AppConfigTemplate extends SimpleFileTemplate {
   @override
