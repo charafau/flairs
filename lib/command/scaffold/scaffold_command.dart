@@ -19,13 +19,13 @@ class ScaffoldCommand implements FlairsCommand {
     if (command != null &&
         command.name == this.command &&
         command.arguments != null &&
-        command.arguments.length > 1) {
-      print('got it');
+        command.arguments.length > 2) {
       if (_hasFeatureSpecified(command)) {
         print('has feature');
       } else {
         print('no feature');
-        _createFutureDirectories('main');
+//        _createFutureDirectories('main');
+
       }
     } else {
       print(usage);
@@ -56,4 +56,27 @@ class ScaffoldCommand implements FlairsCommand {
   bool _hasFeatureSpecified(ArgResults command) {
     return command.arguments.length != command.rest.length;
   }
+}
+
+class InputModel {
+  String modelName;
+
+  Map<String, String> fields;
+
+  InputModel.fromCommand(ArgResults argResults) {
+    final args = argResults.arguments;
+    modelName = args[0];
+    fields = {};
+
+    final argFieds = args.sublist(1, args.length);
+
+    argFieds.forEach((f) {
+      var field = f.split(':');
+      if (field.length == 2 && types.contains(field[1])) {
+        fields.putIfAbsent(field[0], () => field[1]);
+      }
+    });
+  }
+
+  static final List<String> types = ['string', 'int', 'double', 'bool'];
 }
