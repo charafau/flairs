@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:args/args.dart';
 import 'package:flairs/command/flairs_command.dart';
+import 'package:flairs/command/scaffold/templates/data/datasource/local_data_source_template.dart';
+import 'package:flairs/command/scaffold/templates/data/datasource/remote_data_source_template.dart';
 
 class ScaffoldCommand implements FlairsCommand {
   ScaffoldCommand({this.appName});
@@ -26,6 +28,13 @@ class ScaffoldCommand implements FlairsCommand {
         print('no feature');
 //        _createFutureDirectories('main');
 
+        var inputModel = InputModel.fromCommand(parser);
+        print('input model is $inputModel');
+
+        var localDataSourceTemplate = RemoteDataSourceTemplate(inputModel);
+        print('local: ${localDataSourceTemplate.template()}');
+        print('name ${localDataSourceTemplate.fileName()}');
+        print('path ${localDataSourceTemplate.filePath()}');
       }
     } else {
       print(usage);
@@ -65,7 +74,7 @@ class InputModel {
 
   InputModel.fromCommand(ArgResults argResults) {
     final args = argResults.arguments;
-    modelName = args[0];
+    modelName = args[1];
     fields = {};
 
     final argFieds = args.sublist(1, args.length);
@@ -77,6 +86,22 @@ class InputModel {
       }
     });
   }
+
+  @override
+  String toString() {
+    return 'InputModel{modelName: $modelName, fields: $fields}';
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is InputModel &&
+          runtimeType == other.runtimeType &&
+          modelName == other.modelName &&
+          fields == other.fields;
+
+  @override
+  int get hashCode => modelName.hashCode ^ fields.hashCode;
 
   static final List<String> types = ['string', 'int', 'double', 'bool'];
 }
