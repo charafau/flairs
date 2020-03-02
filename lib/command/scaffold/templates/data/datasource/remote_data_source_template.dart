@@ -3,11 +3,16 @@ import 'package:flairs/command/scaffold/scaffold_command.dart';
 import 'package:recase/recase.dart';
 
 class RemoteDataSourceTemplate extends ParamFileTemplate {
-  RemoteDataSourceTemplate(InputModel inputModel) : super(inputModel);
+  final String featureName;
+  final String appName;
+
+  RemoteDataSourceTemplate(this.appName, InputModel inputModel,
+      {this.featureName = "main"})
+      : super(inputModel);
 
   @override
   String fileName() {
-    final rc = ReCase('${inputModel.modelName}_local_data_source.dart');
+    final rc = ReCase('${inputModel.modelName}_remote_data_source.dart');
     return rc.snakeCase;
   }
 
@@ -23,8 +28,8 @@ class RemoteDataSourceTemplate extends ParamFileTemplate {
     final t = '''
     import 'dart:convert';
 
-    import 'package:clean_arch_trivia/core/error/exception.dart';
-    import 'package:clean_arch_trivia/features/number_trivia/data/dto/number_trivia_dto.dart';
+    import 'package:%%APPNAME%%/core/error/exception.dart';
+    import 'package:%%APPNAME%%/features/%%FEATURE%%/data/dto/%%SNAKEMODEL%%_dto.dart';
     import 'package:http/http.dart' as http;
     import 'package:meta/meta.dart';
 
@@ -67,6 +72,9 @@ class RemoteDataSourceTemplate extends ParamFileTemplate {
     var tt = t.replaceAll('%%NAME%%', rc.pascalCase);
     tt = tt.replaceAll('%%NAMECONSTANT%%', rc.constantCase);
     tt = tt.replaceAll('%%NAMECAMEL%%', rc.camelCase);
+    tt = tt.replaceAll("%%APPNAME%%", appName);
+    tt = tt.replaceAll("%%FEATURE%%", featureName);
+    tt = tt.replaceAll("%%SNAKEMODEL%%", rc.snakeCase);
 
     return tt;
   }

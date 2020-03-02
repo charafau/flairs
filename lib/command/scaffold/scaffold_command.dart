@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:args/args.dart';
 import 'package:flairs/command/flairs_command.dart';
+import 'package:flairs/command/param_file_template.dart';
 import 'package:flairs/command/scaffold/templates/data/datasource/local_data_source_template.dart';
 import 'package:flairs/command/scaffold/templates/data/datasource/remote_data_source_template.dart';
+import 'package:flairs/command/scaffold/templates/data/repository_impl/repository_impl_template.dart';
 
 class ScaffoldCommand implements FlairsCommand {
   ScaffoldCommand({this.appName});
@@ -21,7 +23,7 @@ class ScaffoldCommand implements FlairsCommand {
     if (command != null &&
         command.name == this.command &&
         command.arguments != null &&
-        command.arguments.length > 2) {
+        command.arguments.length > 1) {
       if (_hasFeatureSpecified(command)) {
         print('has feature');
       } else {
@@ -31,10 +33,16 @@ class ScaffoldCommand implements FlairsCommand {
         var inputModel = InputModel.fromCommand(parser);
         print('input model is $inputModel');
 
-        var localDataSourceTemplate = RemoteDataSourceTemplate(inputModel);
+        // var localDataSourceTemplate = LocalDataSourceTemplate(inputModel);
+        var localDataSourceTemplate =
+            RemoteDataSourceTemplate(appName, inputModel);
         print('local: ${localDataSourceTemplate.template()}');
         print('name ${localDataSourceTemplate.fileName()}');
         print('path ${localDataSourceTemplate.filePath()}');
+        _createFutureDirectories('main');
+        _createFileFromTemtplate(RemoteDataSourceTemplate(appName, inputModel));
+        _createFileFromTemtplate(LocalDataSourceTemplate(appName, inputModel));
+        _createFileFromTemtplate(RepositoryImplTemplate(appName, inputModel));
       }
     } else {
       print(usage);
@@ -59,6 +67,14 @@ class ScaffoldCommand implements FlairsCommand {
     final currentDirectory = Directory.current;
     dirs.forEach((dir) {
       Directory('${currentDirectory.path}/$dir').createSync(recursive: true);
+    });
+  }
+
+  void _createFileFromTemtplate(ParamFileTemplate template) {
+    File('${template.filePath()}${template.fileName()}')
+        .create(recursive: true)
+        .then((f) {
+      f.writeAsString(template.template());
     });
   }
 
