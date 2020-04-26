@@ -1,0 +1,35 @@
+import 'package:flairs/features/main/data/cache/person_cache.dart';
+import 'package:hive/hive.dart';
+
+abstract class PersonLocalDataSource {
+  Future<List<PersonCache>> getpersons();
+
+  Future<void> savepersons(List<PersonCache> posts);
+}
+
+class PersonLocalDataSourceImpl extends PersonLocalDataSource {
+  static const String personBox = 'person';
+
+  @override
+  Future<List<PersonCache>> getPersons() async {
+    final box = await _openLocalBox();
+
+    final result = box.get(postBox)?.cast<PersonCache>();
+    return result ?? [];
+  }
+
+  Future<Box> _openLocalBox() async {
+    final box = await Hive.openBox('person_local_get');
+    return box;
+  }
+
+  @override
+  Future<void> savepersons(List<PersonCache> list) async {
+    final box = await _openLocalBox();
+    list.forEach((element) async {
+      await box.add(element);
+    });
+  }
+}
+
+  

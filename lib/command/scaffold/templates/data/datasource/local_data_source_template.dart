@@ -18,7 +18,7 @@ class LocalDataSourceTemplate extends ParamFileTemplate {
 
   @override
   String filePath() {
-    return './main/data/datasource/';
+    return './$featureName/data/datasource/';
   }
 
   @override
@@ -26,52 +26,49 @@ class LocalDataSourceTemplate extends ParamFileTemplate {
     final rc = ReCase(inputModel.modelName);
 
     final t = '''
-  import 'dart:convert';
+import 'package:%%APPNAME%%/features/%%FEATURE%%/data/cache/%%SNAKEMODEL%%_cache.dart';
+import 'package:hive/hive.dart';
 
-  import 'package:%%APPNAME%%/core/error/exception.dart';
-  import 'package:%%APPNAME%%/features/%%FEATURE%%/data/dto/%%SNAKEMODEL%%_dto.dart';
-  import 'package:shared_preferences/shared_preferences.dart';
-  import 'package:meta/meta.dart';
+abstract class %%NAME%%LocalDataSource {
+  Future<List<%%NAME%%Cache>> get%%NAMECAMEL%%s();
 
-  abstract class %%NAME%%LocalDataSource {
-    Future<%%NAME%%Dto> getLastNumberTrivia();
+  Future<void> save%%NAMECAMEL%%s(List<%%NAME%%Cache> posts);
+}
 
-    Future<void> cacheNumberTrivia(%%NAME%%Dto %%NAMECAMEL%%);
+class %%NAME%%LocalDataSourceImpl extends %%NAME%%LocalDataSource {
+  static const String %%NAMECAMEL%%Box = '%%SNAKEMODEL%%';
+
+  @override
+  Future<List<%%NAME%%Cache>> get%%NAME%%s() async {
+    final box = await _openLocalBox();
+
+    final result = box.get(postBox)?.cast<%%NAME%%Cache>();
+    return result ?? [];
   }
 
-  const CACHED_%%NAMECONSTANT%% = 'CACHED_%%NAMECONSTANT%%';
-
-  class %%NAME%%DataSourceImpl implements %%NAME%%LocalDataSource {
-    final SharedPreferences sharedPreferences;
-
-    %%NAME%%LocalDataSourceImpl({@required this.sharedPreferences});
-
-    @override
-    Future<void> cache%%NAME%%(%%NAME%%Dto %%NAMECAMEL%%) {
-      return sharedPreferences.setString(
-        CACHED_%%NAMECONSTANT%%,
-        json.encode(%%NAMECAMEL%%.toJson()),
-      );
-    }
-
-    @override
-    Future<%%NAME%%Dto> getLast%%NAME%%() {
-      final jsonString = sharedPreferences.getString(CACHED_%%NAMECONSTANT%%);
-      if (jsonString != null) {
-        return Future.value(NumberTriviaDto.fromJson(json.decode(jsonString)));
-      } else {
-        throw CacheException();
-      }
-    }
+  Future<Box> _openLocalBox() async {
+    final box = await Hive.openBox('%%NAMESNAKE%%_local_get');
+    return box;
   }
+
+  @override
+  Future<void> save%%NAMECAMEL%%s(List<%%NAME%%Cache> list) async {
+    final box = await _openLocalBox();
+    list.forEach((element) async {
+      await box.add(element);
+    });
+  }
+}
 
   ''';
 
     var tt = t.replaceAll('%%NAME%%', rc.pascalCase);
     tt = tt.replaceAll('%%NAMECONSTANT%%', rc.constantCase);
     tt = tt.replaceAll('%%NAMECAMEL%%', rc.camelCase);
+    tt = tt.replaceAll('%%NAMESNAKE%%', rc.snakeCase);
     tt = tt.replaceAll("%%APPNAME%%", appName);
     tt = tt.replaceAll("%%FEATURE%%", featureName);
+    tt = tt.replaceAll("%%SNAKEMODEL%%", rc.snakeCase);
 
     return tt;
   }

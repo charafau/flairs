@@ -18,7 +18,7 @@ class RemoteDataSourceTemplate extends ParamFileTemplate {
 
   @override
   String filePath() {
-    return './main/data/datasource/';
+    return './$featureName/data/datasource/';
   }
 
   @override
@@ -26,49 +26,48 @@ class RemoteDataSourceTemplate extends ParamFileTemplate {
     final rc = ReCase(inputModel.modelName);
 
     final t = '''
-    import 'dart:convert';
+import 'package:%%APPNAME%%/features/%%FEATURE%%/data/datasource/%%SNAKEMODEL%%_rest_client.dart';
+import 'package:%%APPNAME%%/features/%%FEATURE%%/data/dto/%%SNAKEMODEL%%_dto.dart';
 
-    import 'package:%%APPNAME%%/core/error/exception.dart';
-    import 'package:%%APPNAME%%/features/%%FEATURE%%/data/dto/%%SNAKEMODEL%%_dto.dart';
-    import 'package:http/http.dart' as http;
-    import 'package:meta/meta.dart';
+abstract class %%NAME%%RemoteDataSource {
+  Future<List<%%NAME%%Dto>> get%%NAME%%s();
 
-    abstract class %%NAME%%RemoteDataSource {
-      Future<%%NAME%%Dto> getConcrete%%NAME%%(int number);
+  Future<%%NAME%%Dto> %%NAMECAMEL%%Post(%%NAME%%Dto dto);
 
-      Future<%%NAME%%Dto> getRandom%%NAME%%();
-    }
+  Future<%%NAME%%Dto> updatePost(%%NAME%%Dto dto);
 
-    class %%NAME%%RemoteDataSourceImpl implements %%NAME%%RemoteDataSource {
-      final http.Client client;
+  Future<void> delete%%NAME%%(%%NAME%%Dto dto);
+}
 
-      %%NAME%%RemoteDataSourceImpl({@required this.client});
+class %%NAME%%RemoteDataSourceImpl implements %%NAME%%RemoteDataSource {
+  final %%NAME%%RestClient restClient;
 
-//      @override
-//      Future<%%NAME%%Dto> getConcreteNumberTrivia(int number) =>
-//          _getTriviaFromUrl('http://numbersapi.com/');
+  %%NAME%%RemoteDataSourceImpl(this.restClient);
 
-      @override
-      Future<%%NAME%%Dto> getRandomNumberTrivia() =>
-          _getTriviaFromUrl('http://numbersapi.com/random');
+  @override
+  Future<List<%%NAME%%Dto>> get%%NAME%%s() async {
+    final List<%%NAME%%Dto> response = await restClient.get%%NAME%%s();
+    return response;
+  }
 
-      Future<%%NAME%%Dto> _getTriviaFromUrl(String url) async {
-        final response = await client.get(
-          url,
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        );
+  @override
+  Future<%%NAME%%Dto> post%%NAME%%(%%NAME%%Dto dto) async {
+    final result = await restClient.post%%NAME%%(dto);
+    return result;
+  }
 
-        if (response.statusCode == 200) {
-          return %%NAME%%Dto.fromJson(json.decode(response.body));
-        } else {
-          throw ServerException();
-        }
-      }
-    }
+  @override
+  Future<%%NAME%%Dto> update%%NAME%%(%%NAME%%Dto dto) async {
+    final result = await restClient.update%%NAME%%(dto.id, dto);
+    return result;
+  }
 
-    ''';
+  @override
+  Future<void> delete%%NAME%%(%%NAME%%Dto dto) async => await restClient.delete%%NAME%%(dto.id);
+}
+
+  ''';
+
     var tt = t.replaceAll('%%NAME%%', rc.pascalCase);
     tt = tt.replaceAll('%%NAMECONSTANT%%', rc.constantCase);
     tt = tt.replaceAll('%%NAMECAMEL%%', rc.camelCase);

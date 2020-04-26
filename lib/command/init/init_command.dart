@@ -3,14 +3,12 @@ import 'dart:io';
 import 'package:args/args.dart';
 import 'package:flairs/command/flairs_command.dart';
 import 'package:flairs/command/init/templates/app_config_template.dart';
-import 'package:flairs/command/init/templates/app_notifier_template.dart';
 import 'package:flairs/command/init/templates/app_theme_template.dart';
+import 'package:flairs/command/init/templates/bloc_template.dart';
 import 'package:flairs/command/init/templates/exception_template.dart';
 import 'package:flairs/command/init/templates/failure_template.dart';
 import 'package:flairs/command/init/templates/helpers_template.dart';
 import 'package:flairs/command/init/templates/network_info_template.dart';
-import 'package:flairs/command/init/templates/result_template.dart';
-import 'package:flairs/command/init/templates/status_template.dart';
 import 'package:flairs/command/simple_file_template.dart';
 
 class InitCommand extends FlairsCommand {
@@ -30,12 +28,10 @@ class InitCommand extends FlairsCommand {
     ExceptionTemplate(),
     FailureTempalte(),
     AppConfigTemplate(),
-    AppNotifierTemplate(),
+    BlocTemplate(),
     AppThemeTemplate(),
     HelpersTemplate(),
     NetworkInfoTemplate(),
-    ResultTemplate(),
-    StatusTemplate(),
   ];
 
   void checkActions(ArgResults parser) async {
@@ -67,7 +63,7 @@ class InitCommand extends FlairsCommand {
 
   List<String> coreDirectories = [
     'core/error',
-    'core/notifier',
+    'core/bloc',
     'core/platform',
     'core/result',
   ];

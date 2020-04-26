@@ -5,6 +5,7 @@ import 'package:flairs/command/flairs_command.dart';
 import 'package:flairs/command/param_file_template.dart';
 import 'package:flairs/command/scaffold/templates/data/datasource/local_data_source_template.dart';
 import 'package:flairs/command/scaffold/templates/data/datasource/remote_data_source_template.dart';
+import 'package:flairs/command/scaffold/templates/data/datasource/rest_client_template.dart';
 import 'package:flairs/command/scaffold/templates/data/repository_impl/repository_impl_template.dart';
 
 class ScaffoldCommand implements FlairsCommand {
@@ -35,14 +36,14 @@ class ScaffoldCommand implements FlairsCommand {
 
         // var localDataSourceTemplate = LocalDataSourceTemplate(inputModel);
         var localDataSourceTemplate =
-            RemoteDataSourceTemplate(appName, inputModel);
+            RestClientTemplate(appName, inputModel);
         print('local: ${localDataSourceTemplate.template()}');
         print('name ${localDataSourceTemplate.fileName()}');
         print('path ${localDataSourceTemplate.filePath()}');
         _createFutureDirectories('main');
         _createFileFromTemtplate(RemoteDataSourceTemplate(appName, inputModel));
         _createFileFromTemtplate(LocalDataSourceTemplate(appName, inputModel));
-        _createFileFromTemtplate(RepositoryImplTemplate(appName, inputModel));
+        // _createFileFromTemtplate(RepositoryImplTemplate(appName, inputModel));
       }
     } else {
       print(usage);
