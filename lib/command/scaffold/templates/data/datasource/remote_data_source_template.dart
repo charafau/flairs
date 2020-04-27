@@ -25,7 +25,7 @@ class RemoteDataSourceTemplate extends ParamFileTemplate {
   String template() {
     final rc = ReCase(inputModel.modelName);
 
-    final t = '''
+    final template = '''
 import 'package:%%APPNAME%%/features/%%FEATURE%%/data/datasource/%%SNAKEMODEL%%_rest_client.dart';
 import 'package:%%APPNAME%%/features/%%FEATURE%%/data/dto/%%SNAKEMODEL%%_dto.dart';
 
@@ -68,13 +68,6 @@ class %%NAME%%RemoteDataSourceImpl implements %%NAME%%RemoteDataSource {
 
   ''';
 
-    var tt = t.replaceAll('%%NAME%%', rc.pascalCase);
-    tt = tt.replaceAll('%%NAMECONSTANT%%', rc.constantCase);
-    tt = tt.replaceAll('%%NAMECAMEL%%', rc.camelCase);
-    tt = tt.replaceAll("%%APPNAME%%", appName);
-    tt = tt.replaceAll("%%FEATURE%%", featureName);
-    tt = tt.replaceAll("%%SNAKEMODEL%%", rc.snakeCase);
-
-    return tt;
+    return replaceTemplates(template, rc, appName, featureName);
   }
 }

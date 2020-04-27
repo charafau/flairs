@@ -25,7 +25,7 @@ class LocalDataSourceTemplate extends ParamFileTemplate {
   String template() {
     final rc = ReCase(inputModel.modelName);
 
-    final t = '''
+    final template = '''
 import 'package:%%APPNAME%%/features/%%FEATURE%%/data/cache/%%SNAKEMODEL%%_cache.dart';
 import 'package:hive/hive.dart';
 
@@ -62,14 +62,6 @@ class %%NAME%%LocalDataSourceImpl extends %%NAME%%LocalDataSource {
 
   ''';
 
-    var tt = t.replaceAll('%%NAME%%', rc.pascalCase);
-    tt = tt.replaceAll('%%NAMECONSTANT%%', rc.constantCase);
-    tt = tt.replaceAll('%%NAMECAMEL%%', rc.camelCase);
-    tt = tt.replaceAll('%%NAMESNAKE%%', rc.snakeCase);
-    tt = tt.replaceAll("%%APPNAME%%", appName);
-    tt = tt.replaceAll("%%FEATURE%%", featureName);
-    tt = tt.replaceAll("%%SNAKEMODEL%%", rc.snakeCase);
-
-    return tt;
+    return replaceTemplates(template, rc, appName, featureName);
   }
 }

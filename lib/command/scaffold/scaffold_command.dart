@@ -7,6 +7,12 @@ import 'package:flairs/command/scaffold/templates/data/datasource/local_data_sou
 import 'package:flairs/command/scaffold/templates/data/datasource/remote_data_source_template.dart';
 import 'package:flairs/command/scaffold/templates/data/datasource/rest_client_template.dart';
 import 'package:flairs/command/scaffold/templates/data/repository_impl/repository_impl_template.dart';
+import 'package:flairs/command/scaffold/templates/domain/usecase/delete_usercase_template.dart';
+import 'package:flairs/command/scaffold/templates/domain/usecase/get_usecase_template.dart';
+import 'package:flairs/command/scaffold/templates/domain/usecase/post_usecase_template.dart';
+import 'package:flairs/command/scaffold/templates/domain/usecase/update_usecase_template.dart';
+
+import 'templates/domain/repository/repository_template.dart';
 
 class ScaffoldCommand implements FlairsCommand {
   ScaffoldCommand({this.appName});
@@ -36,7 +42,7 @@ class ScaffoldCommand implements FlairsCommand {
 
         // var localDataSourceTemplate = LocalDataSourceTemplate(inputModel);
         var localDataSourceTemplate =
-            RestClientTemplate(appName, inputModel);
+            DeleteUsecaseTemplate(appName, inputModel);
         print('local: ${localDataSourceTemplate.template()}');
         print('name ${localDataSourceTemplate.fileName()}');
         print('path ${localDataSourceTemplate.filePath()}');

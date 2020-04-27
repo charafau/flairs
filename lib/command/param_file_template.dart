@@ -18,6 +18,8 @@ abstract class ParamFileTemplate {
     tt = tt.replaceAll('%%NAMECONSTANT%%', rc.constantCase);
     tt = tt.replaceAll('%%NAMECAMEL%%', rc.camelCase);
     tt = tt.replaceAll("%%APPNAME%%", appName);
+    tt = tt.replaceAll("%%SNAKENAME%%", rc.snakeCase);
+    tt = tt.replaceAll("%%SNAKEMODEL%%", rc.snakeCase);
     tt = tt.replaceAll("%%FEATURE%%", featureName);
 
     return tt;

@@ -24,21 +24,22 @@ class GetUsecaseTemplate extends ParamFileTemplate {
 
   @override
   String template() {
+    final rc = ReCase('${inputModel.modelName}');
+
     final temp = """
-    import 'package:%%APPNAME%%/core/error/failure.dart';
-    import 'package:%%APPNAME%%/features/%%FEATURE%%/domain/model/number_trivia.dart';
-    import 'package:%%APPNAME%%/features/%%FEATURE%%/domain/repository/number_trivia_repository.dart';
-    import 'package:dartz/dartz.dart';
+import 'package:%%APPNAME%%/core/error/failure.dart';
+import 'package:%%APPNAME%%/features/%%FEATURE%%/domain/model/%%SNAKEMODEL%%.dart';
+import 'package:%%APPNAME%%/features/%%FEATURE%%/domain/repository/%%SNAKEMODEL%%_repository.dart';
+import 'package:dartz/dartz.dart';
 
-    class Get%%NAME%%UseCase {
-      final %%NAME%%Repository repository;
+class Get%%NAME%%sUseCase {
+  final %%NAME%%Repository repository;
 
-      Get%%NAME%%UseCases(this.repository);
+  Get%%NAME%%sUseCase(this.repository);
 
-      Future<Either<Failure, %%NAME%%>> call(int id) async {
-        return await repository.get%%NAME%%(id);
-      }
-    }
+  Future<Either<Failure, List<%%NAME%%>>> call() async =>
+      await repository.get%%NAME%%s();
+}
 
     """;
 

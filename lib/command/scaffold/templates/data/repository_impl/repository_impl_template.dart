@@ -18,88 +18,95 @@ class RepositoryImplTemplate extends ParamFileTemplate {
 
   @override
   String filePath() {
-    return './main/data/repository_impl/';
+    return './$featureName/data/repository_impl/';
   }
 
   @override
   String template() {
     final rc = ReCase('${inputModel.modelName}');
 
-    final template = """
-    import 'package:%%APPNAME%%/core/error/exception.dart';
-    import 'package:%%APPNAME%%/core/error/failure.dart';
-    import 'package:%%APPNAME%%/core/platform/network_info.dart';
-    import 'package:%%APPNAME%%/features/%%FEATURE%%/data/datasource/%%SNAKEMODEL%%_local_data_source.dart';
-    import 'package:%%APPNAME%%/features/%%FEATURE%%/data/datasource/%%SNAKEMODEL%%_remote_data_source.dart';
-    import 'package:%%APPNAME%%/features/%%FEATURE%%/domain/model/%%SNAKEMODEL%%.dart';
-    import 'package:%%APPNAME%%/features/%%FEATURE%%/domain/repository/%%SNAKEMODEL%%_repository.dart';
-    import 'package:dartz/dartz.dart';
-    import 'package:meta/meta.dart';
+    final template = '''
+import 'package:%%APPNAME%%core/error/exception.dart';
+import 'package:%%APPNAME%%/core/error/failure.dart';
+import 'package:%%APPNAME%%/core/platform/network_info.dart';
+import 'package:%%APPNAME%%/features/%%FEATURE%%/data/cache/%%SNAKENAME%%_cache.dart';
+import 'package:%%APPNAME%%/features/%%FEATURE%%/data/datasource/%%SNAKENAME%%_local_data_source.dart';
+import 'package:%%APPNAME%%/features/%%FEATURE%%/data/datasource/%%SNAKENAME%%_remote_data_source.dart';
+import 'package:%%APPNAME%%/features/%%FEATURE%%/data/dto/%%SNAKENAME%%_dto.dart';
+import 'package:%%APPNAME%%/features/%%FEATURE%%/domain/model/%%SNAKENAME%%.dart';
+import 'package:%%APPNAME%%/features/%%FEATURE%%/domain/repository/%%SNAKENAME%%_repository.dart';
+import 'package:dartz/dartz.dart';
+import 'package:meta/meta.dart';
 
-    class %%NAME%%RepositoryImpl implements %%NAME%%Repository {
-      final %%NAME%%RemoteDataSource remoteDataSource;
-      final %%NAME%%LocalDataSource localDataSource;
-      final NetworkInfo networkInfo;
+class %%NAME%%RepositoryImpl implements %%NAME%%Repository {
+  final %%NAME%%LocalDataSource localDataSource;
+  final %%NAME%%RemoteDataSource remoteDataSource;
+  final NetworkInfo networkInfo;
 
-      %%NAME%%RepositoryImpl({
-        @required this.remoteDataSource,
-        @required this.localDataSource,
-        @required this.networkInfo,
-      });
+  %%NAME%%RepositoryImpl({
+    @required this.localDataSource,
+    @required this.remoteDataSource,
+    @required this.networkInfo,
+  });
 
-      @override
-      Future<Either<Failure, %%NAME%%>> getConcrete%%NAME%%(
-          int number) async {
-        networkInfo.isConnected;
-        if (await networkInfo.isConnected) {
-          try {
-            final dto = await remoteDataSource.getConcrete%%NAME%%(number);
+  @override
+  Future<Either<Failure, List<%%NAME%%>>> get%%NAME%%s() async {
+    if (await networkInfo.isConnected) {
+      try {
+        final List<%%NAME%%Dto> %%NAMECAMEL%%Dto = await remoteDataSource.get%%NAME%%s();
 
-            localDataSource.cache%%NAME%%(dto);
-            return Right(%%NAME%%(text: dto.text, number: dto.number));
-          } on ServerException {
-            return Left(ServerFailure());
-          }
-        } else {
-          try {
-            final dto = await localDataSource.getLast%%NAME%%();
-            return Right(%%NAME%%(text: dto.text, number: dto.number));
-          } on CacheException {
-            return Left(CacheFailure());
-          }
-        }
+        localDataSource
+            .save%%NAME%%s(%%NAMECAMEL%%sDto.map((dto) => dto.toCache()).toList());
+
+        return Right(%%NAMECAMEL%%sDto.map((d) => %%NAME%%.fromDto(d)).toList());
+      } on ServerException {
+        return Left(ServerFailure());
       }
-
-      @override
-      Future<Either<Failure, %%NAME%%>> getRandom%%NAME%%() async {
-        networkInfo.isConnected;
-        if (await networkInfo.isConnected) {
-          try {
-            final dto = await remoteDataSource.getRandom%%NAME%%();
-
-            localDataSource.cache%%NAME%%(dto);
-            return Right(%%NAME%%(text: dto.text, number: dto.number));
-          } on ServerException {
-            return Left(ServerFailure());
-          }
-        } else {
-          try {
-            final dto = await localDataSource.getLast%%NAME%%();
-            return Right(%%NAME%%(text: dto.text, number: dto.number));
-          } on CacheException {
-            return Left(CacheFailure());
-          }
-        }
+    } else {
+      try {
+        final List<%%NAME%%Cache> %%NAMECAMEL%%sCached = await localDataSource.get%%NAME%%s();
+        return Right(%%NAMECAMEL%%sCached.map((c) => %%NAME%%.fromCache(c)).toList());
+      } on CacheException {
+        return Left(CacheFailure());
       }
     }
+  }
 
-    """;
+  Future<Either<Failure, %%NAME%%>> post%%NAME%%(%%NAME%% %%NAMECAMEL%%) async {
+    try {
+      final %%NAME%%Dto result = await remoteDataSource.post%%NAME%%(%%NAMECAMEL%%.toDto());
 
-    var output = template.replaceAll("%%NAME%%", rc.pascalCase);
-    output = output.replaceAll("%%SNAKEMODEL%%", rc.snakeCase);
+      return Right(%%NAME%%.fromDto(result));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
 
-    output = output.replaceAll("%%APPNAME%%", appName);
-    output = output.replaceAll("%%FEATURE%%", featureName);
-    return output;
+  @override
+  Future<Either<Failure, %%NAME%%>> update%%NAME%%(%%NAME%% %%NAMECAMEL%%) async {
+    try {
+      final %%NAME%%Dto result = await remoteDataSource.update%%NAME%%(%%NAMECAMEL%%.toDto());
+
+      return Right(%%NAME%%.fromDto(result));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> delete%%NAME%%(%%NAME%% %%NAMECAMEL%%) async {
+    try {
+      await remoteDataSource.delete%%NAME%%(%%NAMECAMEL%%.toDto());
+
+      return Right(true);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+}
+
+    ''';
+
+    return replaceTemplates(template, rc, appName, featureName);
   }
 }
