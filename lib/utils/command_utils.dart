@@ -14,6 +14,27 @@ class CommandUtils {
 
   static List<String> inputFieldsToClassFields(Map<String, String> fields) {
     final typedFields = <String>[];
+    var index = 0;
+    fields.forEach((name, type) {
+      if (!types.contains(type.toLowerCase())) {
+        throw TypeException(name, type);
+      }
+
+      if (type.toLowerCase() == 'string') {
+        typedFields.add('@HiveField($index)\nString $name;');
+      } else {
+        typedFields.add('@HiveField($index)\n${type.toLowerCase()} $name;');
+      }
+
+      index++;
+    });
+
+    return typedFields;
+  }
+
+
+  static List<String> inputFieldsToHiveClassFields(Map<String, String> fields) {
+    final typedFields = <String>[];
 
     fields.forEach((name, type) {
       if (!types.contains(type.toLowerCase())) {
@@ -40,5 +61,10 @@ class CommandUtils {
 
   static String copyFields(Map<String, String> fields, {String from}){
     return fields.keys.map((name) => '$name: ${from ?? 'this'}.$name').toList().join(',').toString();
+  }
+
+  
+  static String toStringFields(Map<String, String> fields){
+    return fields.keys.map((name) => '$name: \$$name').toList().join(', ').toString();
   }
 }

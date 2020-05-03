@@ -4,6 +4,7 @@ import 'package:args/args.dart';
 import 'package:dart_style/dart_style.dart';
 import 'package:flairs/command/flairs_command.dart';
 import 'package:flairs/command/param_file_template.dart';
+import 'package:flairs/command/scaffold/templates/data/cache/cache_template.dart';
 import 'package:flairs/command/scaffold/templates/data/datasource/local_data_source_template.dart';
 import 'package:flairs/command/scaffold/templates/data/datasource/remote_data_source_template.dart';
 import 'package:flairs/command/scaffold/templates/data/datasource/rest_client_template.dart';
@@ -44,9 +45,10 @@ class ScaffoldCommand implements FlairsCommand {
         print('input model is $inputModel');
 
         // var localDataSourceTemplate = LocalDataSourceTemplate(inputModel);
-        var localDataSourceTemplate = DtoTemplate(appName, inputModel);
+        var localDataSourceTemplate = CacheTemplate(appName, inputModel);
         // print('local: ${localDataSourceTemplate.template()}');
-        print('\n\nformatted: \n${formatter.format(localDataSourceTemplate.template())}\n\n');
+        print(
+            '\n\nformatted: \n${formatter.format(localDataSourceTemplate.template())}\n\n');
         print('name ${localDataSourceTemplate.fileName()}');
         print('path ${localDataSourceTemplate.filePath()}');
         // _createFutureDirectories('main');

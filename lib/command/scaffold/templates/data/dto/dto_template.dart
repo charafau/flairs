@@ -54,6 +54,11 @@ class %%NAME%%Dto {
       %%TOCACHEFIELDS%%,
     );
   }
+
+  @override
+  String toString() {
+    return '%%NAME%%Dto{%%TOSTRINGFIELDS%%}';
+  }
 }
 
     """;
@@ -69,6 +74,9 @@ class %%NAME%%Dto {
 
     tt = tt.replaceAll('%%FROMCACHEFIELDS%%',
         CommandUtils.copyFields(inputModel.fields, from: 'cache'));
+
+    tt = tt.replaceAll(
+        '%%TOSTRINGFIELDS%%', CommandUtils.toStringFields(inputModel.fields));
 
     return replaceTemplates(tt, rc, appName, featureName);
   }
