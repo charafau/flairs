@@ -12,8 +12,8 @@ class EventTemplate extends ParamFileTemplate {
 
   @override
   String fileName() {
-    rc = ReCase('${inputModel.modelName}_event.dart');
-    return rc.snakeCase;
+    final rc = ReCase(inputModel.modelName);
+    return '${rc.snakeCase}_event.dart';
   }
 
   @override

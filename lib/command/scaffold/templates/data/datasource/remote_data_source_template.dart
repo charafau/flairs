@@ -12,8 +12,8 @@ class RemoteDataSourceTemplate extends ParamFileTemplate {
 
   @override
   String fileName() {
-    final rc = ReCase('${inputModel.modelName}_remote_data_source.dart');
-    return rc.snakeCase;
+    final rc = ReCase(inputModel.modelName);
+    return '${rc.snakeCase}_remote_data_source.dart';
   }
 
   @override

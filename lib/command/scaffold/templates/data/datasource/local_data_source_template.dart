@@ -12,8 +12,8 @@ class LocalDataSourceTemplate extends ParamFileTemplate {
 
   @override
   String fileName() {
-    final rc = ReCase('${inputModel.modelName}_local_data_source.dart');
-    return rc.snakeCase;
+    final rc = ReCase(inputModel.modelName);
+    return '${rc.snakeCase}_local_data_source.dart';
   }
 
   @override

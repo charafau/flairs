@@ -12,8 +12,8 @@ class RepositoryImplTemplate extends ParamFileTemplate {
 
   @override
   String fileName() {
-    final rc = ReCase('${inputModel.modelName}_repository_impl.dart');
-    return rc.snakeCase;
+    final rc = ReCase(inputModel.modelName);
+    return '${rc.snakeCase}_repository_impl.dart';
   }
 
   @override

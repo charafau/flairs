@@ -12,8 +12,9 @@ class RestClientTemplate extends ParamFileTemplate {
 
   @override
   String fileName() {
-    final rc = ReCase('${inputModel.modelName}_remote_data_source.dart');
+    final rc = ReCase('${inputModel.modelName}_rest_client.dart');
     return rc.snakeCase;
+
   }
 
   @override

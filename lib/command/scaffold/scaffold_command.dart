@@ -1,11 +1,13 @@
 import 'dart:io';
 
 import 'package:args/args.dart';
+import 'package:dart_style/dart_style.dart';
 import 'package:flairs/command/flairs_command.dart';
 import 'package:flairs/command/param_file_template.dart';
 import 'package:flairs/command/scaffold/templates/data/datasource/local_data_source_template.dart';
 import 'package:flairs/command/scaffold/templates/data/datasource/remote_data_source_template.dart';
 import 'package:flairs/command/scaffold/templates/data/datasource/rest_client_template.dart';
+import 'package:flairs/command/scaffold/templates/data/dto/dto_template.dart';
 import 'package:flairs/command/scaffold/templates/data/repository_impl/repository_impl_template.dart';
 import 'package:flairs/command/scaffold/templates/domain/usecase/delete_usercase_template.dart';
 import 'package:flairs/command/scaffold/templates/domain/usecase/get_usecase_template.dart';
@@ -31,6 +33,7 @@ class ScaffoldCommand implements FlairsCommand {
         command.name == this.command &&
         command.arguments != null &&
         command.arguments.length > 1) {
+      final formatter = DartFormatter();
       if (_hasFeatureSpecified(command)) {
         print('has feature');
       } else {
@@ -41,14 +44,14 @@ class ScaffoldCommand implements FlairsCommand {
         print('input model is $inputModel');
 
         // var localDataSourceTemplate = LocalDataSourceTemplate(inputModel);
-        var localDataSourceTemplate =
-            DeleteUsecaseTemplate(appName, inputModel);
-        print('local: ${localDataSourceTemplate.template()}');
+        var localDataSourceTemplate = DtoTemplate(appName, inputModel);
+        // print('local: ${localDataSourceTemplate.template()}');
+        print('\n\nformatted: \n${formatter.format(localDataSourceTemplate.template())}\n\n');
         print('name ${localDataSourceTemplate.fileName()}');
         print('path ${localDataSourceTemplate.filePath()}');
-        _createFutureDirectories('main');
-        _createFileFromTemtplate(RemoteDataSourceTemplate(appName, inputModel));
-        _createFileFromTemtplate(LocalDataSourceTemplate(appName, inputModel));
+        // _createFutureDirectories('main');
+        // _createFileFromTemtplate(RemoteDataSourceTemplate(appName, inputModel));
+        // _createFileFromTemtplate(LocalDataSourceTemplate(appName, inputModel));
         // _createFileFromTemtplate(RepositoryImplTemplate(appName, inputModel));
       }
     } else {
@@ -97,13 +100,13 @@ class InputModel {
 
   InputModel.fromCommand(ArgResults argResults) {
     final args = argResults.arguments;
+    print('args are $args');
     modelName = args[1];
     fields = {};
 
-    final argFieds = args.sublist(1, args.length);
-
-    argFieds.forEach((f) {
-      var field = f.split(':');
+    final argsFields = args.sublist(2);
+    argsFields.forEach((f) {
+      final field = f.split(':');
       if (field.length == 2 && types.contains(field[1])) {
         fields.putIfAbsent(field[0], () => field[1]);
       }

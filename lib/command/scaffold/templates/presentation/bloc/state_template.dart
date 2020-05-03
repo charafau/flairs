@@ -12,8 +12,8 @@ class StateTemplate extends ParamFileTemplate {
 
   @override
   String fileName() {
-    rc = ReCase('${inputModel.modelName}_state.dart');
-    return rc.snakeCase;
+    final rc = ReCase(inputModel.modelName);
+    return '${rc.snakeCase}_state.dart';
   }
 
   @override
