@@ -10,6 +10,7 @@ import 'package:flairs/command/scaffold/templates/data/datasource/remote_data_so
 import 'package:flairs/command/scaffold/templates/data/datasource/rest_client_template.dart';
 import 'package:flairs/command/scaffold/templates/data/dto/dto_template.dart';
 import 'package:flairs/command/scaffold/templates/data/repository_impl/repository_impl_template.dart';
+import 'package:flairs/command/scaffold/templates/domain/model/model_template.dart';
 import 'package:flairs/command/scaffold/templates/domain/usecase/delete_usercase_template.dart';
 import 'package:flairs/command/scaffold/templates/domain/usecase/get_usecase_template.dart';
 import 'package:flairs/command/scaffold/templates/domain/usecase/post_usecase_template.dart';
@@ -45,7 +46,7 @@ class ScaffoldCommand implements FlairsCommand {
         print('input model is $inputModel');
 
         // var localDataSourceTemplate = LocalDataSourceTemplate(inputModel);
-        var localDataSourceTemplate = CacheTemplate(appName, inputModel);
+        var localDataSourceTemplate = ModelTemplate(appName, inputModel);
         // print('local: ${localDataSourceTemplate.template()}');
         print(
             '\n\nformatted: \n${formatter.format(localDataSourceTemplate.template())}\n\n');
