@@ -15,7 +15,10 @@ import 'package:flairs/command/scaffold/templates/domain/usecase/delete_usercase
 import 'package:flairs/command/scaffold/templates/domain/usecase/get_usecase_template.dart';
 import 'package:flairs/command/scaffold/templates/domain/usecase/post_usecase_template.dart';
 import 'package:flairs/command/scaffold/templates/domain/usecase/update_usecase_template.dart';
+import 'package:flairs/command/scaffold/templates/screen/create_screen_template.dart';
+import 'package:flairs/command/scaffold/templates/screen/edit_screen_template.dart';
 import 'package:flairs/command/scaffold/templates/screen/form_template.dart';
+import 'package:flairs/command/scaffold/templates/screen/view_screen_template.dart';
 
 import 'templates/domain/repository/repository_template.dart';
 
@@ -47,7 +50,7 @@ class ScaffoldCommand implements FlairsCommand {
         print('input model is $inputModel');
 
         // var localDataSourceTemplate = LocalDataSourceTemplate(inputModel);
-        var localDataSourceTemplate = FormTemplate(appName, inputModel);
+        var localDataSourceTemplate = CreateScreenTemplate(appName, inputModel);
         // print('local: ${localDataSourceTemplate.template()}');
         print(
             '\n\nformatted: \n${formatter.format(localDataSourceTemplate.template())}\n\n');
