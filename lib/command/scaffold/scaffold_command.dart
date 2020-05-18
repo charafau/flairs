@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:args/args.dart';
 import 'package:dart_style/dart_style.dart';
 import 'package:flairs/command/flairs_command.dart';
+import 'package:flairs/command/init/templates/bloc_template.dart';
 import 'package:flairs/command/param_file_template.dart';
 import 'package:flairs/command/scaffold/templates/data/cache/cache_template.dart';
 import 'package:flairs/command/scaffold/templates/data/datasource/local_data_source_template.dart';
@@ -15,9 +16,13 @@ import 'package:flairs/command/scaffold/templates/domain/usecase/delete_usercase
 import 'package:flairs/command/scaffold/templates/domain/usecase/get_usecase_template.dart';
 import 'package:flairs/command/scaffold/templates/domain/usecase/post_usecase_template.dart';
 import 'package:flairs/command/scaffold/templates/domain/usecase/update_usecase_template.dart';
+import 'package:flairs/command/scaffold/templates/presentation/bloc/event_template.dart';
+import 'package:flairs/command/scaffold/templates/presentation/bloc/model_bloc_template.dart';
+import 'package:flairs/command/scaffold/templates/presentation/bloc/state_template.dart';
 import 'package:flairs/command/scaffold/templates/screen/create_screen_template.dart';
 import 'package:flairs/command/scaffold/templates/screen/edit_screen_template.dart';
 import 'package:flairs/command/scaffold/templates/screen/form_template.dart';
+import 'package:flairs/command/scaffold/templates/screen/list_screen_template.dart';
 import 'package:flairs/command/scaffold/templates/screen/view_screen_template.dart';
 
 import 'templates/domain/repository/repository_template.dart';
@@ -50,16 +55,42 @@ class ScaffoldCommand implements FlairsCommand {
         print('input model is $inputModel');
 
         // var localDataSourceTemplate = LocalDataSourceTemplate(inputModel);
-        var localDataSourceTemplate = CreateScreenTemplate(appName, inputModel);
+        // var localDataSourceTemplate = ModelBlocTemplate(appName, inputModel);
         // print('local: ${localDataSourceTemplate.template()}');
-        print(
-            '\n\nformatted: \n${formatter.format(localDataSourceTemplate.template())}\n\n');
-        print('name ${localDataSourceTemplate.fileName()}');
-        print('path ${localDataSourceTemplate.filePath()}');
-        // _createFutureDirectories('main');
-        // _createFileFromTemtplate(RemoteDataSourceTemplate(appName, inputModel));
-        // _createFileFromTemtplate(LocalDataSourceTemplate(appName, inputModel));
-        // _createFileFromTemtplate(RepositoryImplTemplate(appName, inputModel));
+        // print(
+        //     '\n\nformatted: \n${formatter.format(localDataSourceTemplate.template())}\n\n');
+        // print('name ${localDataSourceTemplate.fileName()}');
+        // print('path ${localDataSourceTemplate.filePath()}');
+        _createFutureDirectories('main');
+
+        // Data layer
+        _createFileFromTemtplate(CacheTemplate(appName, inputModel));
+        _createFileFromTemtplate(LocalDataSourceTemplate(appName, inputModel));
+        _createFileFromTemtplate(RemoteDataSourceTemplate(appName, inputModel));
+        _createFileFromTemtplate(RestClientTemplate(appName, inputModel));
+        _createFileFromTemtplate(DtoTemplate(appName, inputModel));
+        _createFileFromTemtplate(RepositoryImplTemplate(appName, inputModel));
+
+        // Domain layer
+        _createFileFromTemtplate(ModelTemplate(appName, inputModel));
+        _createFileFromTemtplate(RepositoryTemplate(appName, inputModel));
+        _createFileFromTemtplate(DeleteUsecaseTemplate(appName, inputModel));
+        _createFileFromTemtplate(GetUsecaseTemplate(appName, inputModel));
+        _createFileFromTemtplate(PostUsecaseTemplate(appName, inputModel));
+        _createFileFromTemtplate(UpdateUsecaseTemplate(appName, inputModel));
+
+        // Presentation layer
+        _createFileFromTemtplate(EventTemplate(appName, inputModel));
+        _createFileFromTemtplate(StateTemplate(appName, inputModel));
+        _createFileFromTemtplate(ModelBlocTemplate(appName, inputModel));
+
+
+        // Screens
+        _createFileFromTemtplate(CreateScreenTemplate(appName, inputModel));
+        _createFileFromTemtplate(EditScreenTemplate(appName, inputModel));
+        _createFileFromTemtplate(FormTemplate(appName, inputModel));
+        _createFileFromTemtplate(ListScreenTemplate(appName, inputModel));
+        _createFileFromTemtplate(ViewScreenTemplate(appName, inputModel));
       }
     } else {
       print(usage);
@@ -103,6 +134,7 @@ class ScaffoldCommand implements FlairsCommand {
 class InputModel {
   String modelName;
 
+  // name : type
   Map<String, String> fields;
 
   InputModel.fromCommand(ArgResults argResults) {

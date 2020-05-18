@@ -64,38 +64,7 @@ class _%%NAME%%FormState extends State<%%NAME%%Form> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              initialValue: _form%%NAME%%.title,
-              decoration: InputDecoration(labelText: 'Title'),
-              onSaved: (v) {
-                setState(() {
-                  _form%%NAME%% = _form%%NAME%%.copy(title: v);
-                });
-              },
-              validator: (val) {
-                if (val.isEmpty) return "Please enter some text";
-                return null;
-              },
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              initialValue: _form%%NAME%%.body,
-              decoration: InputDecoration(labelText: 'Body'),
-              onSaved: (v) {
-                setState(() {
-                  _form%%NAME%% = _form%%NAME%%.copy(body: v);
-                });
-              },
-              validator: (val) {
-                if (val.isEmpty) return "Please enter some text";
-                return null;
-              },
-            ),
-          ),
+          %%FORMFIELDS%%
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
@@ -118,6 +87,43 @@ class _%%NAME%%FormState extends State<%%NAME%%Form> {
 }
     """;
 
-    return replaceTemplates(temp, rc, appName, featureName);
+    final fields = _modelToFormWidgets();
+    var template = temp.replaceAll('%%FORMFIELDS%%', fields);
+
+    template = replaceTemplates(template, rc, appName, featureName);
+    return template;
+  }
+
+  String _modelToFormWidgets() {
+    var output = '';
+
+    inputModel.fields.forEach((name, type) {
+      final rc = ReCase(name);
+
+      final w = """
+
+ Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              initialValue: _form%%NAME%%.$name,
+              decoration: InputDecoration(labelText: '${rc.titleCase}'),
+              onSaved: (v) {
+                setState(() {
+                  _form%%NAME%% = _form%%NAME%%.copy($name: v);
+                });
+              },
+              validator: (val) {
+                if (val.isEmpty) return "Please enter some text";
+                return null;
+              },
+            ),
+          ),
+
+      """;
+
+      output = output + w;
+    });
+
+    return output;
   }
 }
