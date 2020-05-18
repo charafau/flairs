@@ -51,14 +51,16 @@ class InitCommand extends FlairsCommand {
     }
   }
 
-  Future<void> generateFileFromTemplate(SimpleFileTemplate template) async {
+  void generateFileFromTemplate(SimpleFileTemplate template) {
     final appNamedTemplate =
         template.template.replaceAll('%%APPNAME%%', appName);
-    return File('${template.filePath}${template.fileName}')
+    File('${template.filePath}${template.fileName}')
         .create(recursive: true)
         .then((f) {
       f.writeAsString(appNamedTemplate);
     });
+
+    print('Creating file: ${template.filePath}${template.fileName}');
   }
 
   List<String> coreDirectories = [

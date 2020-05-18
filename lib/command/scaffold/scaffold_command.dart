@@ -108,9 +108,6 @@ class ScaffoldCommand implements FlairsCommand {
       '$featureName/domain/repository',
       '$featureName/domain/usecase',
       '$featureName/presentation',
-      '$featureName/presentation/notifier',
-      '$featureName/presentation/page',
-      '$featureName/presentation/widget',
     ];
     final currentDirectory = Directory.current;
     dirs.forEach((dir) {
@@ -124,6 +121,8 @@ class ScaffoldCommand implements FlairsCommand {
         .then((f) {
       f.writeAsString(template.template());
     });
+
+    print('Creating file: ${template.filePath()}${template.fileName()}');
   }
 
   bool _hasFeatureSpecified(ArgResults command) {

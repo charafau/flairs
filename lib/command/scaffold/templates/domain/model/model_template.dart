@@ -15,12 +15,12 @@ class ModelTemplate extends ParamFileTemplate {
   @override
   String fileName() {
     rc = ReCase(inputModel.modelName);
-    return '${rc.snakeCase}_dto.dart';
+    return '${rc.snakeCase}.dart';
   }
 
   @override
   String filePath() {
-    return './$featureName/data/dto/';
+    return './$featureName/domain/model/';
   }
 
   @override
