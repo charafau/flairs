@@ -50,6 +50,6 @@ class HelpersTemplate extends SimpleFileTemplate {
         },
       ),
     );
-
+}
   ''';
 }

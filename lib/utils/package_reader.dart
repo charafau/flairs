@@ -12,4 +12,12 @@ class PackageReader {
     }
     return null;
   }
+
+  void play(){
+
+    final file = File('./pubspec.yaml');
+    final stringPubspec = file.readAsStringSync();
+    final pubspec = loadYaml(stringPubspec);
+    print('start');
+  }
 }

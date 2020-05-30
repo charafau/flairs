@@ -35,6 +35,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class View%%NAME%%Screen extends StatefulWidget {
+
+  static Route<dynamic> route(%%NAME%% %%NAMECAMEL%%, {Key key}) => MaterialPageRoute(
+        builder: (_) => ViewPostScreen(%%NAMECAMEL%%: %%NAMECAMEL%%, key: key),
+        settings: RouteSettings(name: '/%%NAMECAMEL%%s/view'),
+      );
+
   final %%NAME%% %%NAMECAMEL%%;
 
   const View%%NAME%%Screen({Key key, this.%%NAMECAMEL%%}) : super(key: key);

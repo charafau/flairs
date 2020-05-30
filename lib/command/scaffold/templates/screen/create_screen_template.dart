@@ -35,6 +35,10 @@ class CreateScreenTemplate extends ParamFileTemplate {
     import 'package:flutter_bloc/flutter_bloc.dart';
 
     class Create%%NAME%%Screen extends StatefulWidget {
+      static Route<dynamic> route({Key key}) => MaterialPageRoute(
+        builder: (_) => Create%%NAME%%creen(key: key),
+        settings: RouteSettings(name: '/%%NAMECAMEL%%s/new'));
+
       const Create%%NAME%%Screen({Key key}) : super(key: key);
 
       @override

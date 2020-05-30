@@ -8,7 +8,12 @@ import 'package:flairs/command/init/templates/bloc_template.dart';
 import 'package:flairs/command/init/templates/exception_template.dart';
 import 'package:flairs/command/init/templates/failure_template.dart';
 import 'package:flairs/command/init/templates/helpers_template.dart';
+import 'package:flairs/command/init/templates/injector_template.dart';
+import 'package:flairs/command/init/templates/main_common_template.dart';
+import 'package:flairs/command/init/templates/main_dev_template.dart';
+import 'package:flairs/command/init/templates/main_prod_template.dart';
 import 'package:flairs/command/init/templates/network_info_template.dart';
+import 'package:flairs/command/init/templates/start_screen_template.dart';
 import 'package:flairs/command/simple_file_template.dart';
 
 class InitCommand extends FlairsCommand {
@@ -23,8 +28,11 @@ class InitCommand extends FlairsCommand {
   InitCommand({this.appName});
 
   final List<SimpleFileTemplate> templates = [
-//    MainDevTemplate(),
-//    MainProdTemplate(),
+    MainDevTemplate(),
+    MainProdTemplate(),
+    MainCommonTemplate(),
+    StartScreenTemplate(),
+    InjectorTemplate(),
     ExceptionTemplate(),
     FailureTempalte(),
     AppConfigTemplate(),
@@ -54,7 +62,7 @@ class InitCommand extends FlairsCommand {
   void generateFileFromTemplate(SimpleFileTemplate template) {
     final appNamedTemplate =
         template.template.replaceAll('%%APPNAME%%', appName);
-    File('${template.filePath}${template.fileName}')
+    File('lib/${template.filePath}${template.fileName}')
         .create(recursive: true)
         .then((f) {
       f.writeAsString(appNamedTemplate);
@@ -64,9 +72,9 @@ class InitCommand extends FlairsCommand {
   }
 
   List<String> coreDirectories = [
-    'core/error',
-    'core/bloc',
-    'core/platform',
-    'core/result',
+    'lib/core/error',
+    'lib/core/bloc',
+    'lib/core/platform',
+    'lib/core/screen',
   ];
 }

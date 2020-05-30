@@ -39,6 +39,28 @@ class ListScreenTemplate extends ParamFileTemplate {
     import 'package:flutter_bloc/flutter_bloc.dart';
 
     class List%%NAME%%Screen extends StatelessWidget {
+
+      static Route<dynamic> route() {
+        return MaterialPageRoute(
+          builder: (context) {
+            return Scaffold(
+              appBar: AppBar(
+                title: Text('%%NAME%% list'),
+              ),
+              body: create(),
+            );
+          },
+          settings: RouteSettings(name: '/%%NAMECAMEL%%List'),
+        );
+      }
+
+      static Widget create() {
+        return BlocProvider<%%NAME%%Bloc>(
+          create: (BuildContext context) => %%NAME%%Bloc.create(context),
+          child: %%NAME%%List(),
+        );
+      }
+
       @override
       Widget build(BuildContext context) => %%NAME%%List();
     }
@@ -97,12 +119,8 @@ class ListScreenTemplate extends ParamFileTemplate {
                         itemBuilder: (context, index) {
                           final %%NAMECAMEL%% = state.%%NAMECAMEL%%s[index];
                           return InkWell(
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (BuildContext context) {
-                                return View%%NAME%%Screen(%%NAMECAMEL%%: %%NAMECAMEL%%);
-                              }));
-                            },
+                            onTap: ()  => Navigator.of(context)
+                              .push(View%%NAME%%Screen.route(%%NAMECAMEL%%)), 
                             child: _Item(%%NAMECAMEL%%: %%NAMECAMEL%%),
                           );
                         }),
@@ -113,10 +131,7 @@ class ListScreenTemplate extends ParamFileTemplate {
                     child: FloatingActionButton(
                       child: Icon(Icons.add),
                       onPressed: () {
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: (BuildContext context) {
-                          return Create%%NAME%%Screen();
-                        }));
+                        Navigator.of(context).push(Create%%NAME%%Screen.route()); 
                       },
                     ),
                   )

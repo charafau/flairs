@@ -59,7 +59,7 @@ class %%NAME%%RepositoryImpl implements %%NAME%%Repository {
             .save%%NAME%%s(%%NAMECAMEL%%sDto.map((dto) => dto.toCache()).toList());
 
         return Right(%%NAMECAMEL%%sDto.map((d) => %%NAME%%.fromDto(d)).toList());
-      } on ServerException {
+      } catch (e) {
         return Left(ServerFailure());
       }
     } else {
@@ -77,7 +77,7 @@ class %%NAME%%RepositoryImpl implements %%NAME%%Repository {
       final %%NAME%%Dto result = await remoteDataSource.post%%NAME%%(%%NAMECAMEL%%.toDto());
 
       return Right(%%NAME%%.fromDto(result));
-    } on ServerException {
+    } catch (e) {
       return Left(ServerFailure());
     }
   }
@@ -88,7 +88,7 @@ class %%NAME%%RepositoryImpl implements %%NAME%%Repository {
       final %%NAME%%Dto result = await remoteDataSource.update%%NAME%%(%%NAMECAMEL%%.toDto());
 
       return Right(%%NAME%%.fromDto(result));
-    } on ServerException {
+    } catch (e) {
       return Left(ServerFailure());
     }
   }
@@ -99,7 +99,7 @@ class %%NAME%%RepositoryImpl implements %%NAME%%Repository {
       await remoteDataSource.delete%%NAME%%(%%NAMECAMEL%%.toDto());
 
       return Right(true);
-    } on ServerException {
+    } catch (e) {
       return Left(ServerFailure());
     }
   }

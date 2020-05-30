@@ -35,9 +35,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Edit%%NAME%%Screen extends StatefulWidget {
+
+    static Route<dynamic> route(%%NAME%% %%NAMECAMEL%%, {Key key}) => MaterialPageRoute(
+      builder: (_) => EditPostScreen(%%NAMECAMEL%%: %%NAMECAMEL%%, key: key),
+      settings: RouteSettings(name: '/%%NAMECAMEL%%s/edit'));
+
   final %%NAME%% %%NAMECAMEL%%;
 
-  const Edit%%NAME%%Screen({Key key, this.%%NAMECAMEL%%}) : super(key: key);
+  const Edit%%NAME%%Screen({Key key, @required this.%%NAMECAMEL%%}) : super(key: key);
 
   @override
   _Edit%%NAME%%ScreenState createState() => _Edit%%NAME%%ScreenState();
