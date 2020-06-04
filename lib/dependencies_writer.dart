@@ -101,13 +101,41 @@ class DependenciesWriter {
       updatedDevDeps.putIfAbsent(element, () => '');
     });
 
-
-
     print('deps: \n\n');
     print(updatedDeps);
 
     print('\n\ndev deps: \n\n');
     print(updatedDevDeps);
 
+    final deps = _createDependeciesBlock(updatedDeps);
+    final devDeps = _createDevDependenciesBlock(updatedDevDeps);
+
+    print(deps);
+    print('\n\n');
+    print(devDeps);
+  }
+
+  String _createDependeciesBlock(Map<String, String> updatedDevDeps){
+    var devDeps = "dependencies:\n";
+
+    updatedDevDeps.forEach((key, value) {
+      devDeps = devDeps + "  $key: $value\n";
+    });
+
+    devDeps = devDeps + "  flutter:\n";
+    devDeps = devDeps + "    sdk: flutter\n";
+    return devDeps;
+  }
+
+  String _createDevDependenciesBlock(Map<String, String> updatedDevDeps) {
+    var devDeps = "dev_dependencies:\n";
+
+    updatedDevDeps.forEach((key, value) {
+      devDeps = devDeps + "  $key: $value\n";
+    });
+
+    devDeps = devDeps + "  flutter_test:\n";
+    devDeps = devDeps + "    sdk: flutter\n";
+    return devDeps;
   }
 }
