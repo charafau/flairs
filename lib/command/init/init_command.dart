@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:args/args.dart';
 import 'package:flairs/command/flairs_command.dart';
 import 'package:flairs/command/init/templates/app_config_template.dart';
+import 'package:flairs/command/init/templates/app_drawer_template.dart';
 import 'package:flairs/command/init/templates/app_theme_template.dart';
 import 'package:flairs/command/init/templates/bloc_template.dart';
+import 'package:flairs/command/init/templates/constants_template.dart';
 import 'package:flairs/command/init/templates/exception_template.dart';
 import 'package:flairs/command/init/templates/failure_template.dart';
 import 'package:flairs/command/init/templates/helpers_template.dart';
@@ -33,9 +35,11 @@ class InitCommand extends FlairsCommand {
     MainCommonTemplate(),
     StartScreenTemplate(),
     InjectorTemplate(),
+    ConstatntsTemplate(),
     ExceptionTemplate(),
     FailureTempalte(),
     AppConfigTemplate(),
+    AppDrawerTemaplte(),
     BlocTemplate(),
     AppThemeTemplate(),
     HelpersTemplate(),

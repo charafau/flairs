@@ -11,18 +11,18 @@ void main(List<String> arguments) {
     ..addOption('feature', abbr: 'f');
   final parse = parser.parse(arguments);
 
+  try {
+    final appName = PackageReader().readPackageName();
+    if (appName != null) {
+      var initCommand = InitCommand(appName: appName);
+      initCommand.checkActions(parse);
+      var scaffoldCommand = ScaffoldCommand(appName: appName);
+      scaffoldCommand.checkActions(parse);
 
-DependenciesWriter().addProjectDependencies();
-  // try {
-  //   final appName = PackageReader().readPackageName();
-  //   if (appName != null) {
-  //     var initCommand = InitCommand(appName: appName);
-  //     initCommand.checkActions(parse);
-  //     var scaffoldCommand = ScaffoldCommand(appName: appName);
-  //     scaffoldCommand.checkActions(parse);
-  //   }
-  // } catch (e) {
-  //   print('Got error ${e.toString()}');
-  // }
+      DependenciesWriter().addProjectDependencies();
+    }
+  } catch (e) {
+    print('Got error ${e.toString()}');
+  }
 //  initCommand.checkActions(parse);
 }

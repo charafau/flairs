@@ -4,7 +4,7 @@ class MainCommonTemplate extends SimpleFileTemplate {
   @override
   String get template => '''
 import 'package:%%APPNAME%%/core/app_config.dart';
-import 'package:%%APPNAME%%/core/bloc/simple_bloc_delegate.dart';
+import 'package:%%APPNAME%%/core/bloc/simple_bloc_observer.dart';
 import 'package:%%APPNAME%%/core/screen/start_screen.dart';
 import 'package:%%APPNAME%%/injector.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,7 +19,7 @@ Future<void> bootApp(AppFlavor flavor) async {
   WidgetsFlutterBinding.ensureInitialized();
   putLumberdashToWork(withClients: [ColorizeLumberdash()]);
 
-  BlocSupervisor.delegate = SimpleBlocDelegate();
+  Bloc.observer = SimpleBlocObserver();
   final dependencies = await initDependencies(flavor);
   runApp(_buildRoot(dependencies));
 }
@@ -40,5 +40,4 @@ Widget _buildRoot(List<SingleChildWidget> providers) {
 
   @override
   String get filePath => './';
-
 }

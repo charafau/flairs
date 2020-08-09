@@ -1,4 +1,3 @@
-
 import 'package:flairs/command/simple_file_template.dart';
 
 class StartScreenTemplate extends SimpleFileTemplate {
@@ -6,14 +5,13 @@ class StartScreenTemplate extends SimpleFileTemplate {
   String get fileName => 'start_screen.dart';
 
   @override
-  String get filePath => './core/screen';
+  String get filePath => './core/screen/';
 
   @override
   String get template {
-
     return """
-    import 'package:%%APPNAME%%/core/platform/contants.dart';
-    import 'package:%%APPNAME%%/features/main/presentation/widget/app_drawer.dart';
+    import 'package:%%APPNAME%%/core/platform/constants.dart';
+    import 'package:%%APPNAME%%/core/presentation/widget/app_drawer.dart';
     import 'package:flutter/material.dart';
 
     class StartScreen extends StatelessWidget {
@@ -72,5 +70,4 @@ class StartScreenTemplate extends SimpleFileTemplate {
 
     """;
   }
-
 }

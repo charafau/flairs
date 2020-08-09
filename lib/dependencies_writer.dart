@@ -64,10 +64,10 @@ class DependenciesWriter {
   ];
 
   String addProjectDependencies() {
-    // final file = File('./pubspec.yaml');
-    // final stringPubspec = file.readAsStringSync();
-    // final pubspec = loadYaml(stringPubspec);
-    final pubspec = loadYaml(sampleYaml);
+    final file = File('./pubspec.yaml');
+    final stringPubspec = file.readAsStringSync();
+    final pubspec = loadYaml(stringPubspec);
+    // final pubspec = loadYaml(sampleYaml);
     if (pubspec == null) {
       throw FileSystemException("Could not load file");
     }
@@ -101,11 +101,11 @@ class DependenciesWriter {
       updatedDevDeps.putIfAbsent(element, () => '');
     });
 
-    print('deps: \n\n');
-    print(updatedDeps);
+    // print('deps: \n\n');
+    // print(updatedDeps);
 
-    print('\n\ndev deps: \n\n');
-    print(updatedDevDeps);
+    // print('\n\ndev deps: \n\n');
+    // print(updatedDevDeps);
 
     final deps = _createDependeciesBlock(updatedDeps);
     final devDeps = _createDevDependenciesBlock(updatedDevDeps);
@@ -115,7 +115,7 @@ class DependenciesWriter {
     print(devDeps);
   }
 
-  String _createDependeciesBlock(Map<String, String> updatedDevDeps){
+  String _createDependeciesBlock(Map<String, String> updatedDevDeps) {
     var devDeps = "dependencies:\n";
 
     updatedDevDeps.forEach((key, value) {

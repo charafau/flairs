@@ -2,7 +2,7 @@ import 'package:flairs/command/simple_file_template.dart';
 
 class BlocTemplate extends SimpleFileTemplate {
   @override
-  String get fileName => 'simple_bloc_template.dart';
+  String get fileName => 'simple_bloc_observer.dart';
 
   @override
   String get filePath => './core/bloc/';
@@ -12,7 +12,7 @@ class BlocTemplate extends SimpleFileTemplate {
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lumberdash/lumberdash.dart';
 
-class SimpleBlocDelegate extends BlocDelegate {
+class SimpleBlocObserver extends BlocObserver {
   @override
   void onEvent(Bloc bloc, Object event) {
     super.onEvent(bloc, event);
@@ -26,7 +26,7 @@ class SimpleBlocDelegate extends BlocDelegate {
   }
 
   @override
-  void onError(Bloc bloc, Object error, StackTrace stacktrace) {
+  void onError(Cubit bloc, Object error, StackTrace stacktrace) {
     super.onError(bloc, error, stacktrace);
     logError(error, stacktrace: stacktrace);
   }
@@ -34,7 +34,4 @@ class SimpleBlocDelegate extends BlocDelegate {
 
 
   ''';
-
-
-
 }
