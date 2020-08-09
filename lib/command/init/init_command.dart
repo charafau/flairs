@@ -17,6 +17,7 @@ import 'package:flairs/command/init/templates/main_prod_template.dart';
 import 'package:flairs/command/init/templates/network_info_template.dart';
 import 'package:flairs/command/init/templates/start_screen_template.dart';
 import 'package:flairs/command/simple_file_template.dart';
+import 'package:flairs/dependencies_writer.dart';
 
 class InitCommand extends FlairsCommand {
   @override
@@ -58,6 +59,8 @@ class InitCommand extends FlairsCommand {
         await Directory('$outputDis/$dir').create(recursive: true);
       });
       await templates.forEach(generateFileFromTemplate);
+
+      DependenciesWriter().addProjectDependencies();
     } else {
       print(usage);
     }

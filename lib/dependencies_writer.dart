@@ -61,6 +61,7 @@ class DependenciesWriter {
     'build_runner',
     'mockito',
     'hive_generator',
+    'pedantic',
   ];
 
   String addProjectDependencies() {
