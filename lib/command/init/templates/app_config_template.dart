@@ -14,7 +14,13 @@ class AppConfigTemplate extends SimpleFileTemplate {
   abstract class AppConfig {
     const AppConfig._();
 
-    String get apiLink => "";
+    String get httpScheme => "https";
+
+    String get serverLink => "";
+
+    int get serverPort => null;
+
+    String get apiPath => "api/v1";
 
     AppFlavor get flavor;
 
