@@ -14,7 +14,7 @@ class UpdateUsecaseTemplate extends ParamFileTemplate {
   @override
   String fileName() {
     final rc = ReCase(inputModel.modelName);
-    return '${rc.snakeCase}_usecases.dart';
+    return 'update_${rc.snakeCase}_usecase.dart';
   }
 
   @override
@@ -29,8 +29,8 @@ class UpdateUsecaseTemplate extends ParamFileTemplate {
     final temp = """
 
 import 'package:%%APPNAME%%/core/error/failure.dart';
-import 'package:%%APPNAME%%/features/%%FEATURE%%/domain/model/post.dart';
-import 'package:%%APPNAME%%/features/%%FEATURE%%/domain/repository/post_repository.dart';
+import 'package:%%APPNAME%%/features/%%FEATURE%%/domain/model/%%SNAKEMODEL%%.dart';
+import 'package:%%APPNAME%%/features/%%FEATURE%%/domain/repository/%%SNAKEMODEL%%_repository.dart';
 import 'package:dartz/dartz.dart';
 
 class Update%%NAME%%UseCase {
