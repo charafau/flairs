@@ -32,9 +32,9 @@ import 'package:%%APPNAME%%/features/%%FEATURE%%/data/dto/%%SNAKEMODEL%%_dto.dar
 abstract class %%NAME%%RemoteDataSource {
   Future<List<%%NAME%%Dto>> get%%NAME%%s();
 
-  Future<%%NAME%%Dto> %%NAMECAMEL%%Post(%%NAME%%Dto dto);
+  Future<%%NAME%%Dto> post%%NAME%%(%%NAME%%Dto dto);
 
-  Future<%%NAME%%Dto> updatePost(%%NAME%%Dto dto);
+  Future<%%NAME%%Dto> update%%NAME%%(%%NAME%%Dto dto);
 
   Future<void> delete%%NAME%%(%%NAME%%Dto dto);
 }
@@ -58,10 +58,12 @@ class %%NAME%%RemoteDataSourceImpl implements %%NAME%%RemoteDataSource {
 
   @override
   Future<%%NAME%%Dto> update%%NAME%%(%%NAME%%Dto dto) async {
+    // Please adjust code for update call
     final result = await restClient.update%%NAME%%(dto.id, dto);
     return result;
   }
 
+  // Please adjust code for delete call
   @override
   Future<void> delete%%NAME%%(%%NAME%%Dto dto) async => await restClient.delete%%NAME%%(dto.id);
 }

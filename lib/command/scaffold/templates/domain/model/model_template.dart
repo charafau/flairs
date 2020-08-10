@@ -29,7 +29,7 @@ class ModelTemplate extends ParamFileTemplate {
 
     final temp = """
 import 'package:%%APPNAME%%/features/%%FEATURE%%/data/cache/%%SNAKEMODEL%%_cache.dart';
-import 'package:%%APPNAME%%/features/%%FEATURE%%/data/dto/%%SNAKEMODEL%%.dart';
+import 'package:%%APPNAME%%/features/%%FEATURE%%/data/dto/%%SNAKEMODEL%%_dto.dart';
 import 'package:equatable/equatable.dart';
 
 class %%NAME%% extends Equatable {
@@ -103,9 +103,10 @@ class %%NAME%% extends Equatable {
     tt = tt.replaceAll(
         '%%TODTOFIELDS%%', CommandUtils.copyFields(inputModel.fields));
 
-    final copyFields = CommandUtils.inputFieldsToCopyFields(inputModel.fields, declimeter: ',');
-    tt = tt.replaceAll(
-        "%%COPYFIELDS%%", CommandUtils.classFieldsToString(copyFields, joinChar: ''));
+    final copyFields = CommandUtils.inputFieldsToCopyFields(inputModel.fields,
+        declimeter: ',');
+    tt = tt.replaceAll("%%COPYFIELDS%%",
+        CommandUtils.classFieldsToString(copyFields, joinChar: ''));
 
     tt = tt.replaceAll(
         '%%COPYLOGICFIELDS%%', CommandUtils.copyFieldsLogic(inputModel.fields));

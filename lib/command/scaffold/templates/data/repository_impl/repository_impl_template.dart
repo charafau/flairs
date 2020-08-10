@@ -26,7 +26,7 @@ class RepositoryImplTemplate extends ParamFileTemplate {
     final rc = ReCase('${inputModel.modelName}');
 
     final template = '''
-import 'package:%%APPNAME%%core/error/exception.dart';
+import 'package:%%APPNAME%%/core/error/exception.dart';
 import 'package:%%APPNAME%%/core/error/failure.dart';
 import 'package:%%APPNAME%%/core/platform/network_info.dart';
 import 'package:%%APPNAME%%/features/%%FEATURE%%/data/cache/%%SNAKENAME%%_cache.dart';
@@ -53,7 +53,7 @@ class %%NAME%%RepositoryImpl implements %%NAME%%Repository {
   Future<Either<Failure, List<%%NAME%%>>> get%%NAME%%s() async {
     if (await networkInfo.isConnected) {
       try {
-        final List<%%NAME%%Dto> %%NAMECAMEL%%Dto = await remoteDataSource.get%%NAME%%s();
+        final List<%%NAME%%Dto> %%NAMECAMEL%%sDto = await remoteDataSource.get%%NAME%%s();
 
         localDataSource
             .save%%NAME%%s(%%NAMECAMEL%%sDto.map((dto) => dto.toCache()).toList());
