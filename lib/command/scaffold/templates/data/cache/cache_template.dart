@@ -8,7 +8,8 @@ class CacheTemplate extends ParamFileTemplate {
   final String appName;
   ReCase rc;
 
-  CacheTemplate(this.appName, InputModel inputModel, {this.featureName = 'main'})
+  CacheTemplate(this.appName, InputModel inputModel,
+      {this.featureName = 'main'})
       : super(inputModel);
 
   @override
@@ -33,14 +34,7 @@ part '%%SNAKEMODEL%%_cache.g.dart';
 
 @HiveType(typeId: %%HIVECLASSTYPE%%)
 class %%NAME%%Cache extends HiveObject {
-  @HiveField(0)
-  int id;
-
-  @HiveField(1)
-  String title;
-
-  @HiveField(2)
-  String body;
+ 
 
   %%HIVETYPEDFIELDS%%
 

@@ -30,9 +30,9 @@ import 'package:%%APPNAME%%/features/%%FEATURE%%/data/cache/%%SNAKEMODEL%%_cache
 import 'package:hive/hive.dart';
 
 abstract class %%NAME%%LocalDataSource {
-  Future<List<%%NAME%%Cache>> get%%NAMECAMEL%%s();
+  Future<List<%%NAME%%Cache>> get%%NAME%%s();
 
-  Future<void> save%%NAMECAMEL%%s(List<%%NAME%%Cache> posts);
+  Future<void> save%%NAME%%s(List<%%NAME%%Cache> posts);
 }
 
 class %%NAME%%LocalDataSourceImpl extends %%NAME%%LocalDataSource {
@@ -42,17 +42,17 @@ class %%NAME%%LocalDataSourceImpl extends %%NAME%%LocalDataSource {
   Future<List<%%NAME%%Cache>> get%%NAME%%s() async {
     final box = await _openLocalBox();
 
-    final result = box.get(postBox)?.cast<%%NAME%%Cache>();
+    final result = box.get(%%NAMECAMEL%%Box)?.cast<%%NAME%%Cache>();
     return result ?? [];
   }
 
   Future<Box> _openLocalBox() async {
-    final box = await Hive.openBox('%%NAMESNAKE%%_local_get');
+    final box = await Hive.openBox('%%SNAKENAME%%_local_get');
     return box;
   }
 
   @override
-  Future<void> save%%NAMECAMEL%%s(List<%%NAME%%Cache> list) async {
+  Future<void> save%%NAME%%s(List<%%NAME%%Cache> list) async {
     final box = await _openLocalBox();
     list.forEach((element) async {
       await box.add(element);

@@ -9,6 +9,7 @@ import 'package:flairs/command/init/templates/bloc_template.dart';
 import 'package:flairs/command/init/templates/constants_template.dart';
 import 'package:flairs/command/init/templates/exception_template.dart';
 import 'package:flairs/command/init/templates/failure_template.dart';
+import 'package:flairs/command/init/templates/feature_injections_template.dart';
 import 'package:flairs/command/init/templates/helpers_template.dart';
 import 'package:flairs/command/init/templates/injector_template.dart';
 import 'package:flairs/command/init/templates/main_common_template.dart';
@@ -36,6 +37,7 @@ class InitCommand extends FlairsCommand {
     MainCommonTemplate(),
     StartScreenTemplate(),
     InjectorTemplate(),
+    FeatureInjectionsTemplate(),
     ConstatntsTemplate(),
     ExceptionTemplate(),
     FailureTempalte(),

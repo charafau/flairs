@@ -84,7 +84,6 @@ class ScaffoldCommand implements FlairsCommand {
         _createFileFromTemtplate(StateTemplate(appName, inputModel));
         _createFileFromTemtplate(ModelBlocTemplate(appName, inputModel));
 
-
         // Screens
         _createFileFromTemtplate(CreateScreenTemplate(appName, inputModel));
         _createFileFromTemtplate(EditScreenTemplate(appName, inputModel));
@@ -92,6 +91,9 @@ class ScaffoldCommand implements FlairsCommand {
         _createFileFromTemtplate(ListScreenTemplate(appName, inputModel));
         _createFileFromTemtplate(ViewScreenTemplate(appName, inputModel));
       }
+
+      print(
+          "Don't forget to run flutter packages run build_runner build --delete-conflicting-outputs");
     } else {
       print(usage);
     }
@@ -111,12 +113,13 @@ class ScaffoldCommand implements FlairsCommand {
     ];
     final currentDirectory = Directory.current;
     dirs.forEach((dir) {
-      Directory('${currentDirectory.path}/$dir').createSync(recursive: true);
+      Directory('${currentDirectory.path}/lib/features/$dir')
+          .createSync(recursive: true);
     });
   }
 
   void _createFileFromTemtplate(ParamFileTemplate template) {
-    File('${template.filePath()}${template.fileName()}')
+    File('./lib/features/${template.filePath()}${template.fileName()}')
         .create(recursive: true)
         .then((f) {
       f.writeAsString(template.template());
