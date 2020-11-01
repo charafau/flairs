@@ -25,7 +25,7 @@ class InitCommand extends FlairsCommand {
   String get command => 'init';
 
   @override
-  String get usage => '''flair init <directory>''';
+  String get usage => '''flairs init <directory>''';
 
   final appName;
 
