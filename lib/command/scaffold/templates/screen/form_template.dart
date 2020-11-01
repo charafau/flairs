@@ -26,7 +26,7 @@ class FormTemplate extends ParamFileTemplate {
     final rc = ReCase('${inputModel.modelName}');
 
     final temp = """
-import 'package:%%APPNAME%%/features/%%FEATURE%%/presentation/screen/%%SNAKEMODEL%%.dart';
+import 'package:%%APPNAME%%/features/%%FEATURE%%/domain/model/%%SNAKEMODEL%%.dart';
 import 'package:flutter/material.dart';
 
 class %%NAME%%Form extends StatefulWidget {

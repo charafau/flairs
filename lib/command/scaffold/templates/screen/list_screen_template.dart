@@ -33,8 +33,8 @@ class ListScreenTemplate extends ParamFileTemplate {
     import 'package:%%APPNAME%%/features/%%FEATURE%%/presentation/bloc/%%SNAKEMODEL%%_bloc.dart';
     import 'package:%%APPNAME%%/features/%%FEATURE%%/presentation/bloc/%%SNAKEMODEL%%_event.dart';
     import 'package:%%APPNAME%%/features/%%FEATURE%%/presentation/bloc/%%SNAKEMODEL%%_state.dart';
-    import 'package:%%APPNAME%%/features/%%FEATURE%%/presentation/page/create_%%SNAKEMODEL%%_screen.dart';
-    import 'package:%%APPNAME%%/features/%%FEATURE%%/presentation/page/view_%%SNAKEMODEL%%_screen.dart';
+    import 'package:%%APPNAME%%/features/%%FEATURE%%/presentation/screen/create_%%SNAKEMODEL%%_screen.dart';
+    import 'package:%%APPNAME%%/features/%%FEATURE%%/presentation/screen/view_%%SNAKEMODEL%%_screen.dart';
     import 'package:flutter/material.dart';
     import 'package:flutter_bloc/flutter_bloc.dart';
 

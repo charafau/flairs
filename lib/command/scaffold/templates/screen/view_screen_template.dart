@@ -30,14 +30,14 @@ class ViewScreenTemplate extends ParamFileTemplate {
 import 'package:%%APPNAME%%/features/%%FEATURE%%/domain/model/%%SNAKEMODEL%%.dart';
 import 'package:%%APPNAME%%/features/%%FEATURE%%/presentation/bloc/%%SNAKEMODEL%%_bloc.dart';
 import 'package:%%APPNAME%%/features/%%FEATURE%%/presentation/bloc/%%SNAKEMODEL%%_state.dart';
-import 'package:%%APPNAME%%/features/%%FEATURE%%/presentation/page/edit_%%SNAKEMODEL%%_screen.dart';
+import 'package:%%APPNAME%%/features/%%FEATURE%%/presentation/screen/edit_%%SNAKEMODEL%%_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class View%%NAME%%Screen extends StatefulWidget {
 
   static Route<dynamic> route(%%NAME%% %%NAMECAMEL%%, {Key key}) => MaterialPageRoute(
-        builder: (_) => ViewPostScreen(%%NAMECAMEL%%: %%NAMECAMEL%%, key: key),
+        builder: (_) => View%%NAME%%Screen(%%NAMECAMEL%%: %%NAMECAMEL%%, key: key),
         settings: RouteSettings(name: '/%%NAMECAMEL%%s/view'),
       );
 

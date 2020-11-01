@@ -28,10 +28,10 @@ class ModelBlocTemplate extends ParamFileTemplate {
 
     final temp = """
 
-import 'package:%%APPNAME%%/features/%%FEATURE%%/domain/usecase/delete_%%SNAKEMODEL%%_use_case.dart';
-import 'package:%%APPNAME%%/features/%%FEATURE%%/domain/usecase/get_%%SNAKEMODEL%%s_use_case.dart';
-import 'package:%%APPNAME%%/features/%%FEATURE%%/domain/usecase/post_%%SNAKEMODEL%%_use_case.dart';
-import 'package:%%APPNAME%%/features/%%FEATURE%%/domain/usecase/update_%%SNAKEMODEL%%_use_case.dart';
+import 'package:%%APPNAME%%/features/%%FEATURE%%/domain/usecase/delete_%%SNAKEMODEL%%_usecase.dart';
+import 'package:%%APPNAME%%/features/%%FEATURE%%/domain/usecase/get_%%SNAKEMODEL%%s_usecase.dart';
+import 'package:%%APPNAME%%/features/%%FEATURE%%/domain/usecase/post_%%SNAKEMODEL%%_usecase.dart';
+import 'package:%%APPNAME%%/features/%%FEATURE%%/domain/usecase/update_%%SNAKEMODEL%%_usecase.dart';
 import 'package:%%APPNAME%%/features/%%FEATURE%%/presentation/bloc/%%SNAKEMODEL%%_event.dart';
 import 'package:%%APPNAME%%/features/%%FEATURE%%/presentation/bloc/%%SNAKEMODEL%%_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,7 +39,7 @@ import 'package:meta/meta.dart';
 
 class %%NAME%%Bloc extends Bloc<%%NAME%%Event, %%NAME%%State> {
   final Get%%NAME%%sUseCase get%%NAME%%sUseCase;
-  final %%NAME%%%%NAME%%UseCase post%%NAME%%UseCase;
+  final Post%%NAME%%UseCase post%%NAME%%UseCase;
   final Update%%NAME%%UseCase update%%NAME%%UseCase;
   final Delete%%NAME%%UseCase delete%%NAME%%UseCase;
 
@@ -48,10 +48,7 @@ class %%NAME%%Bloc extends Bloc<%%NAME%%Event, %%NAME%%State> {
     @required this.get%%NAME%%sUseCase,
     @required this.update%%NAME%%UseCase,
     @required this.delete%%NAME%%UseCase,
-  });
-
-  @override
-  %%NAME%%State get initialState => %%NAME%%Loading();
+  }) : super(%%NAME%%Loading());
 
   @override
   Stream<%%NAME%%State> mapEventToState(%%NAME%%Event event) async* {
