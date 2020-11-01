@@ -29,8 +29,8 @@ class StateTemplate extends ParamFileTemplate {
 import 'package:%%APPNAME%%/features/%%FEATURE%%/domain/model/%%NAMECAMEL%%.dart';
 import 'package:equatable/equatable.dart';
 
-abstract class %NAME%State extends Equatable {
-  const %NAME%State();
+abstract class %%NAME%%State extends Equatable {
+  const %%NAME%%State();
 
   @override
   List<Object> get props => [];
@@ -39,47 +39,47 @@ abstract class %NAME%State extends Equatable {
   bool get stringify => true;
 }
 
-class %NAME%Loading extends %NAME%State {}
+class %%NAME%%Loading extends %%NAME%%State {}
 
-class %NAME%sLoaded extends %NAME%State {
-  final List<%NAME%> %%NAMECAMEL%%s;
+class %%NAME%%sLoaded extends %%NAME%%State {
+  final List<%%NAME%%> %%NAMECAMEL%%s;
 
-  %NAME%sLoaded(this.%%NAMECAMEL%%s);
+  %%NAME%%sLoaded(this.%%NAMECAMEL%%s);
 
   @override
   List<Object> get props => [%%NAMECAMEL%%s];
 }
 
-class %NAME%sNotLoaded extends %NAME%State {}
+class %%NAME%%sNotLoaded extends %%NAME%%State {}
 
-class %NAME%NotCreated extends %NAME%State {}
+class %%NAME%%NotCreated extends %%NAME%%State {}
 
-class %NAME%SuccessfullyCreated extends %NAME%State {
-  final List<%NAME%> %%NAMECAMEL%%s;
+class %%NAME%%SuccessfullyCreated extends %%NAME%%State {
+  final List<%%NAME%%> %%NAMECAMEL%%s;
   final int addedItemIndex;
 
-  %NAME%SuccessfullyCreated(this.%%NAMECAMEL%%s, this.addedItemIndex);
+  %%NAME%%SuccessfullyCreated(this.%%NAMECAMEL%%s, this.addedItemIndex);
 
   @override
   List<Object> get props => [%%NAMECAMEL%%s, addedItemIndex];
 }
 
-class %NAME%SuccessfullyUpdated extends %NAME%State {
-  final %NAME% %%NAMECAMEL%%;
+class %%NAME%%SuccessfullyUpdated extends %%NAME%%State {
+  final %%NAME%% %%NAMECAMEL%%;
 
-  %NAME%SuccessfullyUpdated(this.%%NAMECAMEL%%);
+  %%NAME%%SuccessfullyUpdated(this.%%NAMECAMEL%%);
 
   @override
   List<Object> get props => [%%NAMECAMEL%%];
 }
 
-class %NAME%EditFailed extends %NAME%State {}
+class %%NAME%%EditFailed extends %%NAME%%State {}
 
-class %NAME%DeleteFailed extends %NAME%State {}
+class %%NAME%%DeleteFailed extends %%NAME%%State {}
 
-class %NAME%DeletedSuccessfylly extends %NAME%State {}
+class %%NAME%%DeletedSuccessfylly extends %%NAME%%State {}
 
-class %NAME%Refreshed extends %NAME%State {}
+class %%NAME%%Refreshed extends %%NAME%%State {}
 
     """;
 

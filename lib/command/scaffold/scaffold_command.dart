@@ -34,7 +34,7 @@ class ScaffoldCommand implements FlairsCommand {
   String get command => 'scaffold';
 
   @override
-  String get usage => 'flairs scaffold Person name:string age:int';
+  String get usage => 'flairs scaffold Person id:int name:string age:int';
 
   final String appName;
 

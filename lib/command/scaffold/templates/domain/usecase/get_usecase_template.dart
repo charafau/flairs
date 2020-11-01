@@ -14,7 +14,7 @@ class GetUsecaseTemplate extends ParamFileTemplate {
   @override
   String fileName() {
     final rc = ReCase(inputModel.modelName);
-    return 'get_${rc.snakeCase}_usecase.dart';
+    return 'get_${rc.snakeCase}s_usecase.dart';
   }
 
   @override
