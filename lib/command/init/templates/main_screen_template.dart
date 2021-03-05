@@ -6,7 +6,7 @@ import 'package:recase/recase.dart';
 class MainScreenTemplate extends ParamFileTemplate {
   final String featureName;
   final String appName;
-  ReCase rc;
+  ReCase? rc;
   MainScreenTemplate(this.appName, InputModel inputModel,
       {this.featureName = 'main'})
       : super(inputModel);

@@ -4,7 +4,7 @@ class CommandUtils {
   static RegExp resNameRegEx = RegExp('^[a-zA-Z]\$');
 
   static bool isResourceName(String input) {
-    if (input != null && input.isNotEmpty && !resNameRegEx.hasMatch(input)) {
+    if (input.isNotEmpty && !resNameRegEx.hasMatch(input)) {
       return true;
     }
     return false;
@@ -32,8 +32,8 @@ class CommandUtils {
     return typedFields;
   }
 
-
-  static List<String> inputFieldsToClassFields(Map<String, String> fields, {String declimeter = ';'}) {
+  static List<String> inputFieldsToClassFields(Map<String, String> fields,
+      {String declimeter = ';'}) {
     final typedFields = <String>[];
 
     fields.forEach((name, type) {
@@ -52,24 +52,36 @@ class CommandUtils {
   }
 
   static String inputFieldsToNamedParams(Map<String, String> fields) {
-    return fields.keys.map((name) => 'this.$name').toList().join(',').toString();
+    return fields.keys
+        .map((name) => 'this.$name')
+        .toList()
+        .join(',')
+        .toString();
   }
 
-  static String classFieldsToString(List<String> fields, {String joinChar = '\n'}) {
+  static String classFieldsToString(List<String> fields,
+      {String joinChar = '\n'}) {
     return fields.join(joinChar);
   }
 
-  static String copyFields(Map<String, String> fields, {String from}){
-    return fields.keys.map((name) => '$name: ${from ?? 'this'}.$name').toList().join(',').toString();
+  static String copyFields(Map<String, String> fields, {String? from}) {
+    return fields.keys
+        .map((name) => '$name: ${from ?? 'this'}.$name')
+        .toList()
+        .join(',')
+        .toString();
   }
 
-  
-  static String toStringFields(Map<String, String> fields){
-    return fields.keys.map((name) => '$name: \$$name').toList().join(', ').toString();
+  static String toStringFields(Map<String, String> fields) {
+    return fields.keys
+        .map((name) => '$name: \$$name')
+        .toList()
+        .join(', ')
+        .toString();
   }
 
-
-  static List<String> inputFieldsToCopyFields(Map<String, String> fields,{String declimeter = ';'}) {
+  static List<String> inputFieldsToCopyFields(Map<String, String> fields,
+      {String declimeter = ';'}) {
     final typedFields = <String>[];
 
     fields.forEach((name, type) {
@@ -86,8 +98,12 @@ class CommandUtils {
 
     return typedFields;
   }
-  
-  static String copyFieldsLogic(Map<String, String> fields, {String from}){
-    return fields.keys.map((name) => '$name: $name ?? this.$name').toList().join(',').toString();
+
+  static String copyFieldsLogic(Map<String, String> fields, {String? from}) {
+    return fields.keys
+        .map((name) => '$name: $name ?? this.$name')
+        .toList()
+        .join(',')
+        .toString();
   }
 }

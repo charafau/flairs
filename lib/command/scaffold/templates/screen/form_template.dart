@@ -5,7 +5,7 @@ import 'package:recase/recase.dart';
 class FormTemplate extends ParamFileTemplate {
   final String featureName;
   final String appName;
-  ReCase rc;
+  late ReCase rc;
 
   FormTemplate(this.appName, InputModel inputModel, {this.featureName = 'main'})
       : super(inputModel);

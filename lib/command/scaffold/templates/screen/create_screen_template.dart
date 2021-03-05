@@ -5,7 +5,7 @@ import 'package:recase/recase.dart';
 class CreateScreenTemplate extends ParamFileTemplate {
   final String featureName;
   final String appName;
-  ReCase rc;
+  late ReCase rc;
 
   CreateScreenTemplate(this.appName, InputModel inputModel,
       {this.featureName = 'main'})

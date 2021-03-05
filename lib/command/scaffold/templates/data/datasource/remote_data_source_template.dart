@@ -7,7 +7,7 @@ class RemoteDataSourceTemplate extends ParamFileTemplate {
   final String appName;
 
   RemoteDataSourceTemplate(this.appName, InputModel inputModel,
-      {this.featureName = "main"})
+      {this.featureName = 'main'})
       : super(inputModel);
 
   @override

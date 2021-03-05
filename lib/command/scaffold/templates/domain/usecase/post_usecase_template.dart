@@ -5,7 +5,7 @@ import 'package:recase/recase.dart';
 class PostUsecaseTemplate extends ParamFileTemplate {
   final String featureName;
   final String appName;
-  ReCase rc;
+  late ReCase rc;
 
   PostUsecaseTemplate(this.appName, InputModel inputModel,
       {this.featureName = 'main'})

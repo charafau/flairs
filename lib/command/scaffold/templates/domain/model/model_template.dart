@@ -6,7 +6,7 @@ import 'package:recase/recase.dart';
 class ModelTemplate extends ParamFileTemplate {
   final String featureName;
   final String appName;
-  ReCase rc;
+  late ReCase rc;
 
   ModelTemplate(this.appName, InputModel inputModel,
       {this.featureName = 'main'})
@@ -105,7 +105,7 @@ class %%NAME%% extends Equatable {
 
     final copyFields = CommandUtils.inputFieldsToCopyFields(inputModel.fields,
         declimeter: ',');
-    tt = tt.replaceAll("%%COPYFIELDS%%",
+    tt = tt.replaceAll('%%COPYFIELDS%%',
         CommandUtils.classFieldsToString(copyFields, joinChar: ''));
 
     tt = tt.replaceAll(

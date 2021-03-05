@@ -1,9 +1,7 @@
 import 'dart:io';
 
 import 'package:args/args.dart';
-import 'package:dart_style/dart_style.dart';
 import 'package:flairs/command/flairs_command.dart';
-import 'package:flairs/command/init/templates/bloc_template.dart';
 import 'package:flairs/command/param_file_template.dart';
 import 'package:flairs/command/scaffold/templates/data/cache/cache_template.dart';
 import 'package:flairs/command/scaffold/templates/data/datasource/local_data_source_template.dart';
@@ -28,7 +26,7 @@ import 'package:flairs/command/scaffold/templates/screen/view_screen_template.da
 import 'templates/domain/repository/repository_template.dart';
 
 class ScaffoldCommand implements FlairsCommand {
-  ScaffoldCommand({this.appName});
+  ScaffoldCommand({required this.appName});
 
   @override
   String get command => 'scaffold';
@@ -42,9 +40,7 @@ class ScaffoldCommand implements FlairsCommand {
     final command = parser.command;
     if (command != null &&
         command.name == this.command &&
-        command.arguments != null &&
         command.arguments.length > 1) {
-      final formatter = DartFormatter();
       if (_hasFeatureSpecified(command)) {
         print('has feature');
       } else {
@@ -134,10 +130,10 @@ class ScaffoldCommand implements FlairsCommand {
 }
 
 class InputModel {
-  String modelName;
+  late String modelName;
 
   // name : type
-  Map<String, String> fields;
+  late Map<String, String> fields;
 
   InputModel.fromCommand(ArgResults argResults) {
     final args = argResults.arguments;

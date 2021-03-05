@@ -7,7 +7,7 @@ class RepositoryImplTemplate extends ParamFileTemplate {
   final String appName;
 
   RepositoryImplTemplate(this.appName, InputModel inputModel,
-      {this.featureName = "main"})
+      {this.featureName = 'main'})
       : super(inputModel);
 
   @override

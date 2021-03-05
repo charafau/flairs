@@ -7,7 +7,7 @@ class LocalDataSourceTemplate extends ParamFileTemplate {
   final String appName;
 
   LocalDataSourceTemplate(this.appName, InputModel inputModel,
-      {this.featureName = "main"})
+      {this.featureName = 'main'})
       : super(inputModel);
 
   @override

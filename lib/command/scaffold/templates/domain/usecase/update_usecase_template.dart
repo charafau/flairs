@@ -5,7 +5,7 @@ import 'package:recase/recase.dart';
 class UpdateUsecaseTemplate extends ParamFileTemplate {
   final String featureName;
   final String appName;
-  ReCase rc;
+  late ReCase rc;
 
   UpdateUsecaseTemplate(this.appName, InputModel inputModel,
       {this.featureName = 'main'})

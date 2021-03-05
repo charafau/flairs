@@ -5,7 +5,7 @@ import 'package:recase/recase.dart';
 class ModelBlocTemplate extends ParamFileTemplate {
   final String featureName;
   final String appName;
-  ReCase rc;
+  late ReCase rc;
 
   ModelBlocTemplate(this.appName, InputModel inputModel,
       {this.featureName = 'main'})

@@ -6,7 +6,7 @@ import 'package:recase/recase.dart';
 class DtoTemplate extends ParamFileTemplate {
   final String featureName;
   final String appName;
-  ReCase rc;
+  late ReCase rc;
 
   DtoTemplate(this.appName, InputModel inputModel, {this.featureName = 'main'})
       : super(inputModel);

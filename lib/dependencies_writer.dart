@@ -70,7 +70,7 @@ class DependenciesWriter {
     final pubspec = loadYaml(stringPubspec);
     // final pubspec = loadYaml(sampleYaml);
     if (pubspec == null) {
-      throw FileSystemException("Could not load file");
+      throw FileSystemException('Could not load file');
     }
 
     final YamlMap depMap = pubspec['dependencies'];
@@ -114,6 +114,8 @@ class DependenciesWriter {
     print(deps);
     print('\n\n');
     print(devDeps);
+
+    return 'deps';
   }
 
   String _createDependeciesBlock(Map<String, String> updatedDevDeps) {

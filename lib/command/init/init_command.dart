@@ -54,13 +54,12 @@ class InitCommand extends FlairsCommand {
     if (command != null &&
         command.name != null &&
         command.name == this.command &&
-        command.arguments != null &&
         command.arguments.length == 1) {
       final outputDis = command.arguments.first;
-      await coreDirectories.forEach((dir) async {
+      coreDirectories.forEach((dir) async {
         await Directory('$outputDis/$dir').create(recursive: true);
       });
-      await templates.forEach(generateFileFromTemplate);
+      templates.forEach(generateFileFromTemplate);
 
       DependenciesWriter().addProjectDependencies();
     } else {

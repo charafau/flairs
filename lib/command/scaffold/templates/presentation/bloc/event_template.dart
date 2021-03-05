@@ -5,7 +5,7 @@ import 'package:recase/recase.dart';
 class EventTemplate extends ParamFileTemplate {
   final String featureName;
   final String appName;
-  ReCase rc;
+  late ReCase rc;
   EventTemplate(this.appName, InputModel inputModel,
       {this.featureName = 'main'})
       : super(inputModel);

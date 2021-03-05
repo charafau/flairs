@@ -5,7 +5,7 @@ import 'package:recase/recase.dart';
 class RepositoryTemplate extends ParamFileTemplate {
   final String featureName;
   final String appName;
-  ReCase rc;
+  late ReCase rc;
 
   RepositoryTemplate(this.appName, InputModel inputModel,
       {this.featureName = 'main'})

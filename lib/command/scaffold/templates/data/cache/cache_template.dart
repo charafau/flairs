@@ -6,7 +6,7 @@ import 'package:recase/recase.dart';
 class CacheTemplate extends ParamFileTemplate {
   final String featureName;
   final String appName;
-  ReCase rc;
+  late ReCase rc;
 
   CacheTemplate(this.appName, InputModel inputModel,
       {this.featureName = 'main'})

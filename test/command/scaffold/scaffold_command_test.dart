@@ -6,13 +6,14 @@ import 'package:test/test.dart';
 class MockInputModel extends Mock implements ArgResults {}
 
 void main() {
-  ArgResults args;
+  late ArgResults args;
   setUp(() {
     args = MockInputModel();
   });
 
   test('should parse name for InputModel from arguments', () {
-    when(args.arguments).thenReturn(['scaffold', 'Person', 'name:string', 'age:int']);
+    when(args.arguments)
+        .thenReturn(['scaffold', 'Person', 'name:string', 'age:int']);
 
     final output = InputModel.fromCommand(args);
 
@@ -20,7 +21,8 @@ void main() {
   });
 
   test('should parse fields for InputModel from arguments', () {
-    when(args.arguments).thenReturn(['scaffold', 'Person', 'name:string', 'age:int']);
+    when(args.arguments)
+        .thenReturn(['scaffold', 'Person', 'name:string', 'age:int']);
 
     final output = InputModel.fromCommand(args);
 

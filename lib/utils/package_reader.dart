@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:yaml/yaml.dart';
 
 class PackageReader {
-  String readPackageName() {
+  String? readPackageName() {
     final file = File('./pubspec.yaml');
     final stringPubspec = file.readAsStringSync();
     final pubspec = loadYaml(stringPubspec);
@@ -13,11 +13,9 @@ class PackageReader {
     return null;
   }
 
-  void play(){
-
+  void play() {
     final file = File('./pubspec.yaml');
     final stringPubspec = file.readAsStringSync();
-    final pubspec = loadYaml(stringPubspec);
     print('start');
   }
 }

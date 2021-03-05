@@ -7,7 +7,7 @@ class RestClientTemplate extends ParamFileTemplate {
   final String appName;
 
   RestClientTemplate(this.appName, InputModel inputModel,
-      {this.featureName = "main"})
+      {this.featureName = 'main'})
       : super(inputModel);
 
   @override
@@ -55,9 +55,9 @@ abstract class %%NAME%%RestClient {
     var tt = t.replaceAll('%%NAME%%', rc.pascalCase);
     tt = tt.replaceAll('%%NAMECONSTANT%%', rc.constantCase);
     tt = tt.replaceAll('%%NAMECAMEL%%', rc.camelCase);
-    tt = tt.replaceAll("%%APPNAME%%", appName);
-    tt = tt.replaceAll("%%FEATURE%%", featureName);
-    tt = tt.replaceAll("%%SNAKEMODEL%%", rc.snakeCase);
+    tt = tt.replaceAll('%%APPNAME%%', appName);
+    tt = tt.replaceAll('%%FEATURE%%', featureName);
+    tt = tt.replaceAll('%%SNAKEMODEL%%', rc.snakeCase);
 
     return tt;
   }
